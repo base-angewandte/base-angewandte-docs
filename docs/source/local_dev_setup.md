@@ -6,8 +6,7 @@ This is the basic setup guide for a fresh Linux client system, to
 have everything ready in order to work on our different base applications.
 This should work on most Debian-based distributions. It was specifically tested on:
 
-- Debian 11.4 & 12.4
-- Ubuntu 22.04 LTS
+- Debian 13 (Trixie)
 
 Here are the steps to install everything you will need to work with the _base_ codebase:
 
@@ -19,35 +18,16 @@ Here are the steps to install everything you will need to work with the _base_ c
      ```
    - ```{note}
      Disclaimer: if you really solely work on frontend code or only on backend code, you could either
-     leave out the following step 2 (pyenv) or 3 (nvm), to not clutter your system. But we suggest
+     leave out the following step 2 (uv) or 3 (nvm), to not clutter your system. But we suggest
      installing both, so you are ready also to run frontend or backend code on your machine any time -
      which will be necessary for testing at some point, when you do not want or cannot rely on the
      dev containers.
      ```
-2. Install pyenv (using the [pyenv-installer](https://github.com/pyenv/pyenv-installer)):
-
-   - ```bash
-     curl https://pyenv.run | bash
-
-     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-     echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-     echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-     echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
-
-     source ~/.bashrc
-     ```
-
-   - Check if everything is working with `pyenv -v`. To install a python version and create and
-     activate an environment use the following:
-     ```bash
-     pyenv install 3.11  # (re)installs python 3.11
-     pyenv virtualenv 3.11 project-test  # creates a virtual env based on python 3.11
-     pyenv activate project-test  # activates the new environment, use pyenv deactivate to deactivate
-     ```
-   - For more info on how to use `pyenv`, check [TODO: create public section from our internal docs on pyenv]
-   - If you are using a different shell, or need more finetuning, check the pyenv docs section to
-     [Set up your shell environment for Pyenv](https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv)
-
+2. Install [uv](https://docs.astral.sh/uv/) based on the
+   [uv install instructions](https://docs.astral.sh/uv/getting-started/installation/).
+   We suggest to use the standalone installer if you don't have a specific setup that requires another method.
+   - Check if everything is working with `uv` and `uv --version`.
+   - For a quick ref on how to use `uv` check the [](./tools.md) section.
 3. Install [nvm](https://github.com/nvm-sh/nvm) and the latest LTS version of Node.js:
    - ```bash
      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -114,8 +94,8 @@ This is described in the project's documentation.
 The general procedure looks like this:
 
 1. Clone the required repositories
-2. Create how many environments you need (recommended: one environment per project) with `pyenv` for the backend stuff
-   or use `nvm` to activate the proper node environment for frontend stuff.
+2. Create how many environments you need (recommended: one environment per project) with `uv` for the backend stuff
+   and `nvm` to activate the proper node environment for frontend stuff.
    - See the [](./tools.md) section for a quick reference on how to use pyenv.
 3. Follow the steps on in either the README.md in the repo root folder or the requirements.md and install.md files
    in the docs/source/ (or in older projects only /docs) folder.
