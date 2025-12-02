@@ -6,8 +6,7 @@ This is the basic setup guide for a fresh Linux client system, to
 have everything ready in order to work on our different base applications.
 This should work on most Debian-based distributions. It was specifically tested on:
 
-- Debian 11.4 & 12.4
-- Ubuntu 22.04 LTS
+- Debian 13 (Trixie)
 
 Here are the steps to install everything you will need to work with the _base_ codebase:
 
@@ -27,12 +26,7 @@ Here are the steps to install everything you will need to work with the _base_ c
 2. Install [uv](https://docs.astral.sh/uv/) based on the
    [uv install instructions](https://docs.astral.sh/uv/getting-started/installation/).
    We suggest to use the standalone installer if you don't have a specific setup that requires another method.
-   - Check if everything is working with `uv --version`. To install a python version and create and
-     activate an environment in any folder you want to have it, use the following:
-     ```bash
-     uv venv -p 3.12 .venv  # creates a virtual env based on python 3.12 in the .venv folder
-     source .venv/bin/activate  # activate the new environment (use `deactivate` to deactivate)
-     ```
+   - Check if everything is working with `uv` and `uv --version`.
    - For a quick ref on how to use `uv` check the [](./tools.md) section.
 3. Install [nvm](https://github.com/nvm-sh/nvm) and the latest LTS version of Node.js:
    - ```bash
