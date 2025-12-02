@@ -27,13 +27,13 @@ Here are the steps to install everything you will need to work with the _base_ c
 2. Install [uv](https://docs.astral.sh/uv/) based on the
    [uv install instructions](https://docs.astral.sh/uv/getting-started/installation/).
    We suggest to use the standalone installer if you don't have a specific setup that requires another method.
-
    - Check if everything is working with `uv --version`. To install a python version and create and
      activate an environment in any folder you want to have it, use the following:
      ```bash
      uv venv -p 3.12 .venv  # creates a virtual env based on python 3.12 in the .venv folder
      source .venv/bin/activate  # activate the new environment (use `deactivate` to deactivate)
      ```
+   - For a quick ref on how to use `uv` check the [](./tools.md) section.
 3. Install [nvm](https://github.com/nvm-sh/nvm) and the latest LTS version of Node.js:
    - ```bash
      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
