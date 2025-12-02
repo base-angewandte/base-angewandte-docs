@@ -2,11 +2,60 @@
 
 ## Python
 
+### uv
+
+`uv` is our main tool to manage Python versions and virtual environments. Check out the
+[uv docs](https://docs.astral.sh/uv/) and its Getting Started guide. Here is just a
+short quick-ref on how to use it in our projects.
+
+#### Installation
+
+Download and run the installation script (Linux & macOS):
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Everything should be up and running. Test it with `uv --version`. For different
+installation procedures check out the [installation section](https://docs.astral.sh/uv/getting-started/installation/)
+in the official uv docs. If you don't have a specific requirement for a different
+source/package, we suggest using the standalone installer.
+
+#### Usage
+
+Here are just a few commands we regularly use, for more detailed infos check out the
+[official docs](https://docs.astral.sh/uv/), especially the _First Steps_ and _Features_
+sections.
+
+```bash
+# check available python versions and which you have already installed
+uv python list
+
+# create a new Python 3.12 virtual environment in the .venv folder
+uv venv -p 3.12 .venv
+
+# activate the new environment
+source .venv/bin/activate
+
+# sync all packages in your venv with what is listed in requirements.txt
+uv pip sync requirements.txt
+
+# deactivate you virtual environment (to switch back to the systems main python environment)
+deactivate
+
+# install pre-commit
+uv tool install pre-commit --with pre-commit-uv
+```
+
 ### pyenv and pyenv-virtualenv
 
 Here we outline some notes on installation and usage of pyenv and virtual Python environments
-with pyenv-virtualenv. If you have followed the setup in [](./local_dev_setup.md), you already
-have pyenv and pyenv-virtualenv set up, so you can skip the _Installation_ section below.
+with pyenv-virtualenv.
+
+```{warning}
+In our newer setup we are using `uv`, but some older projects still might be documented
+based on a pyenv setup. This section is kept here, if you still want to use `pyenv` for
+some specific projects. But generally we do advise switching to `uv`.
+```
 
 #### Installation
 
