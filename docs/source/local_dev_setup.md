@@ -71,6 +71,9 @@ Here are the steps to install everything you will need to work with the _base_ c
      git config --global gitflow.feature.finish.no-ff "yes"
      git config --global gitflow.bugfix.finish.no-ff "yes"
      ```
+     ```{note}
+     Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
+     ```
      Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
      `editor ~/.gitconfig`). Here is a template including some handy shortcuts for git:
      ```ini
