@@ -76,6 +76,11 @@ Here are the steps to install everything you will need to work with the _base_ c
      ```{note}
      Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
      ```
+     ```{note}
+     Setting `pull.ff` isn't necessary, but restores the default behavior of `git pull` -- when setting `merge.ff` to `false`, just pulling new changes from a remote would create a merge commit, which is probably not what you want.
+
+     You may wish to not touch the settings for the internal `git` commands at all, and simply always use `git-flow` for dealing with your branches.
+     ```
      Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
      `editor ~/.gitconfig`). Here is a template including some handy shortcuts for git:
      ```ini
