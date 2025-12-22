@@ -70,8 +70,8 @@ Here are the steps to install everything you will need to work with the _base_ c
      git config --global merge.ff "false"
      git config --global pull.ff "true"
      # set settings for the git-flow extension
-     git config --global gitflow.feature.finish.no-ff "yes"
-     git config --global gitflow.bugfix.finish.no-ff "yes"
+     git config --global gitflow.feature.finish.no-ff "true"
+     git config --global gitflow.bugfix.finish.no-ff "true"
      ```
      ```{note}
      Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
@@ -102,9 +102,9 @@ Here are the steps to install everything you will need to work with the _base_ c
      [init]
          defaultBranch = main
      [gitflow "feature.finish"]
-        no-ff = yes
+        no-ff = true
      [gitflow "bugfix.finish"]
-        no-ff = yes
+        no-ff = true
      [merge]
         ff = false
      ```
