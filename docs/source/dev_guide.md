@@ -245,6 +245,8 @@ The main branch should be `main` instead of `master`.
 Additional to the established git-flow branches, `fix` branches can be used similar to `feature` branches,
 for working on bugfixes that should be reviewed before being merged into `develop` again.
 
+When merging a git-flow branch, **always create a merge commit, even if a fast-forward merge is possible, and even if your branch only has one commit**.
+
 #### Commit Guidelines
 
 The cardinal rule for creating good commits is to ensure there is only one "logical change" per commit. There are many reasons why this is an important rule:
