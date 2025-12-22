@@ -73,7 +73,7 @@ Here are the steps to install everything you will need to work with the _base_ c
      git config --global gitflow.feature.finish.no-ff "true"
      git config --global gitflow.bugfix.finish.no-ff "true"
      ```
-     ```{note}
+     ```{warning}
      Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
      ```
      ```{note}
