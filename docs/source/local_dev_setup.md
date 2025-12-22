@@ -108,7 +108,7 @@ Here are the steps to install everything you will need to work with the _base_ c
      [merge]
         ff = false
      [pull]
-        ff = false
+        ff = true
      ```
 
 Now you have a basic setup, except for an IDE you might want to use to work on code.
