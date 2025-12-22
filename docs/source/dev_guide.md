@@ -247,6 +247,10 @@ for working on bugfixes that should be reviewed before being merged into `develo
 
 When merging a git-flow branch, **always create a merge commit, even if a fast-forward merge is possible, and even if your branch only has one commit**.
 
+Check the [](./local_dev_setup.md) section for instructions on how to configure `git merge` and the `git-flow` extension to do the right thing by default here.
+
+Alternatively, you can simply use the `--no-ff` flag on `git-flow` subcommands as well as vanilla `git merge` - for example, `git flow feature finish --no-ff` and `git merge --no-ff feature/add-shrubberies` would both always create a merge commit.
+
 #### Commit Guidelines
 
 The cardinal rule for creating good commits is to ensure there is only one "logical change" per commit. There are many reasons why this is an important rule:
