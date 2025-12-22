@@ -53,7 +53,7 @@ Here are the steps to install everything you will need to work with the _base_ c
      - You should at least update your **user name** and **email** to what you would like to show up in the published commits.
      - Our **default branch is `main`**, which might not be the case with older git versions.
      - We follow the **`git-flow` branching model**. Check the [Git section of the dev guide](./dev_guide.md#git) for more details and a recommended git extension.
-     - **Merge commits** are **mandatory** when finishing a branch, **even if a fast-forward merge is possible, and even if there is only one commit in the branch**, so you might want to change the default behavior of `git merge` to always make a merge commit.
+     - **Merge commits** are **mandatory** when finishing a branch, **even if a fast-forward merge is possible, and even if there is only one commit in the branch**, so you might want to change the default behavior of `git merge` and the `git-flow` extension (if installed) to always make a merge commit.
 
      Here is how to check and update the corresponding settings:
      ```bash
