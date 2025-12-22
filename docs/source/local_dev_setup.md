@@ -63,13 +63,13 @@ Here are the steps to install everything you will need to work with the _base_ c
      git config --global init.defaultBranch
      git config --global merge.ff
      git config --global pull.ff
-     # update the settings
+     # update the settings (careful: applies to all repos!)
      git config --global user.name "Ms. Robot"
      git config --global user.email "ro@example.org"
      git config --global init.defaultBranch "main"
      git config --global merge.ff "false"
      git config --global pull.ff "true"
-     # set settings for the git-flow extension
+     # set settings for the git-flow extension (careful: applies to all repos!)
      git config --global gitflow.feature.finish.no-ff "true"
      git config --global gitflow.bugfix.finish.no-ff "true"
      ```
