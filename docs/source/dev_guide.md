@@ -237,7 +237,7 @@ Use tools like [aXe](https://www.deque.com/products/axe/), [AChecker](http://ach
 
 ### Git
 
-Follow the [git-flow branching model](http://nvie.com/posts/a-successful-git-branching-model/).<br>
+Follow the [git-flow branching model](http://nvie.com/posts/a-successful-git-branching-model/), with a rebase-based workflow as documented below.<br>
 A git extension can be found [here](https://github.com/petervanderdoes/gitflow-avh) and a short introduction of it [here](https://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/).
 
 The main branch should be `main` instead of `master`.
@@ -245,7 +245,19 @@ The main branch should be `main` instead of `master`.
 Additional to the established git-flow branches, `fix` branches can be used similar to `feature` branches,
 for working on bugfixes that should be reviewed before being merged into `develop` again.
 
-When merging a git-flow branch, **always create a merge commit, even if a fast-forward merge is possible, and even if your branch only has one commit**.
+#### Use rebase
+
+When working on a `feature`, `fix` or `hotfix` git-flow branch, **do not merge the target branch back into your branch**. Instead, **rebase on the target branch**. The only exception to this rule is if you are working on a branch where such a merge happened before the rule got introduced, and you would have to replay a merge commit while rebasing.
+
+Regularly rebase these branches on the target branch during development. You must **rebase before code review**, and again **before performing the merge**. This is because unless branches are based on the tip of your target branch, once merged, the tip won't be the code you tested, but a merge product - and even with a clean rebase with no conflicts, there could be regressions.
+
+When collaborating on a branch (or simply pulling in changes made as part of the review process), use the same workflow. Instead of `git pull`, use `git pull --rebase`, instead of `git push` use `git push --force-with-lease` (you may want to alias this to `git please`).
+
+When merging a git-flow branch as described above, **always use the Forgejo (or GitHub) UI to merge a PR**. Do NOT use the `git-flow` tooling to finish branches, as it will not only merge locally, but also delete your local branch.
+
+The only exception is when working on an old branch that the target branch was merged back into before the policy change introducing the rebase workflow (if it happened later, I hope you like re-resolving any conflicts and also maybe [picking cherries](https://git-scm.com/docs/git-cherry-pick)). In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
+
+##### How to implement this workflow
 
 Check the [](./local_dev_setup.md) section for instructions on how to configure `git merge` and the `git-flow` extension to do the right thing by default here.
 
