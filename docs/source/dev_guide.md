@@ -259,9 +259,19 @@ The only exception is when working on an old branch that the target branch was m
 
 ##### How to implement this workflow
 
-Check the [](./local_dev_setup.md) section for instructions on how to configure `git merge` and the `git-flow` extension to do the right thing by default here.
+If you are used to working with conventional merges, then this workflow may seem intimidating. Fortunately, there are many parallels:
 
-Alternatively, you can simply use the `--no-ff` flag on `git-flow` subcommands as well as vanilla `git merge` - for example, `git flow feature finish --no-ff` and `git merge --no-ff feature/add-shrubberies` would both always create a merge commit.
+- Instead of `git merge <target-branch>` to get recent changes from the target branch, do `git rebase <target-branch>`
+  - Be aware that because of how `rebase` works, this might give you more than one set of conflicts, one for each commit in your branch, in contrast to `merge`, where you resolve everything at once.
+- Instead of `git pull` to get new commits others made in a feature branch, do `git pull --rebase`
+- Instead of `git push` to push your changes to a feature branch, do `git push --force-with-lease`
+  - Do **NOT** do `git push --force` **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
+
+You should understand what a rebase does instead of following this cheat sheet blindly, but rest assured, it's not black magic, and not much actually changes.
+
+The previous version of these docs recommended configuring some git commands to do the right thing by default; however, with the new workflow, this makes less sense, the common behaviors aren't necessarily sane defaults (a `git pull` while on `develop` to pull in new changes should error if you accidentally added a commit there instead of a branch). In general, rebasing, while safe if done correctly, should be a conscious choice.
+
+However, there are some aliases in the [](./local_dev_setup.md) section that we'd recommend for ergonomics instead!
 
 #### Commit Guidelines
 
