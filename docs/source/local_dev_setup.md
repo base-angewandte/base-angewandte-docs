@@ -65,27 +65,14 @@ Here are the steps to install everything you will need to work with the _base_ c
      git config --global user.name
      git config --global user.email
      git config --global init.defaultBranch
-     git config --global merge.ff
-     git config --global pull.ff
      # update the settings (careful: applies to all repos!)
      git config --global user.name "Ms. Robot"
      git config --global user.email "ro@example.org"
      git config --global init.defaultBranch "main"
-     git config --global merge.ff "false"
-     git config --global pull.ff "true"
-     # set settings for the git-flow extension (careful: applies to all repos!)
-     git config --global gitflow.feature.finish.no-ff "true"
-     git config --global gitflow.bugfix.finish.no-ff "true"
      ```
 
      ```{warning}
      Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
-     ```
-
-     ```{note}
-     Setting `pull.ff` isn't necessary, but restores the default behavior of `git pull` -- when setting `merge.ff` to `false`, just pulling new changes from a remote would create a merge commit, which is probably not what you want.
-
-     You may wish to not touch the settings for the internal `git` commands at all, and simply always use `git-flow` for dealing with your branches.
      ```
 
      Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
@@ -103,20 +90,15 @@ Here are the steps to install everything you will need to work with the _base_ c
          hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
          type = cat-file -t
          dump = cat-file -p
+         please = push --force-with-lease
+         pure = pull --rebase
+
      [core]
          # leave this one out, if you want to keep the standard (nano), or change
          # to your preferred editor
          editor = vim
      [init]
          defaultBranch = main
-     [gitflow "feature.finish"]
-        no-ff = true
-     [gitflow "bugfix.finish"]
-        no-ff = true
-     [merge]
-        ff = false
-     [pull]
-        ff = true
      ```
 
 Now you have a basic setup, except for an IDE you might want to use to work on code.
