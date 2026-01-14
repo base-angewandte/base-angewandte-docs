@@ -54,6 +54,7 @@ Here are the steps to install everything you will need to work with the _base_ c
 
      - You should at least update your **user name** and **email** to what you would like to show up in the published commits.
      - Our **default branch is `main`**, which might not be the case with older git versions.
+       - But you probably want to check out `develop`, as that represents the newest state of development; `main` is for releases
      - We follow the **`git-flow` branching model**. Check the [Git section of the Development Guide](./dev_guide.md#git) for more details and a recommended git extension.
      - For `feature`/`fix`/`hotfix` branches, we use `rebase`; do NOT merge the target branch (or any other branch) back into the branch you are working on! Instead, use `git rebase target-branch`. Again, see the [Git section of the Development Guide](./dev_guide.md#git) for more details.
      - Always use the Forgejo/GitHub UI for merging these branches!
