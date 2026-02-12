@@ -1,5 +1,48 @@
 # Using Git and Forgejo
 
+There is a lot of information about how we use Git and Forgejo, so it all lives
+in one place here in order to be easy to find, and not bloat the relevant parts
+of the other sections.
+
+The other sections refer to this document, so you may want to read them first
+and return here with more context. Just be aware that you should definitely do
+so and become familiar with our workflow before contributing.
+
+## Philosophy and informal tl;dr
+
+As a quick intro and contextualization:
+- We see `git` as a tool to create a curated history of changes, not as a tool
+  to document the development process.
+  - This means that we implement a **workflow based on `git rebase`**, and don't
+    care about rewriting history.
+  - The exception to this rule are **`main` and `develop`** (see below). These
+    branches are treated as **immutable history**.
+- We have development instances that reflect the latest state of development,
+  which we also use for user acceptance testing. Production instances run code
+  that has been deemed ready for production deployment.
+  - This means that despite usually being overkill for developing web
+    applications, **`git-flow` is useful to us, and we implement it**.
+  - It also means that while it's somewhat less critical that **`develop`** be in
+    a perfect state than `main`, it **should be treated as a production branch**
+    just the same.
+- Our test coverage is (depending on the project) far from complete at best,
+  nonexistent at worst. We are working on CI infrastructure, but as of 2026-02,
+  it is in its infancy.
+  - This means that **we rely on `pre-commit` for QA**. It's not just a tool to
+    avoid having to make changes due to CI failing, it IS currently our main
+    line of defense. **Using it is essential**.
+- Internally, for code review, we follow the principle that
+  - We **trust each other as professionals** to make correct calls taking into
+    account with the available info that was considered.
+  - We **do NOT trust** that, as we are humans, all relevant **info WAS available, or
+    considered**.
+  - So: We implement safeguards, but these safeguards are soft and
+    intentionally circumventable - **but only by intentional and explicit action**.
+    - For example, branch protection exists, but everyone has permission to
+      temporarily disable it.
+  - And in general, we apply **EAFP over LBYL**. Rules aren't technically enforced,
+    but if they are broken, there had better be a good reason for it.
+
 ## Setup
 
 Before committing, make sure to check/update your git configuration:
