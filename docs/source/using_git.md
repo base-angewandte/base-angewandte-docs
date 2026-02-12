@@ -98,6 +98,10 @@ Here is how to check and update the corresponding settings:
 
 ## Development
 
+### Workflow
+
+#### `git-flow`
+
 Follow the [git-flow branching model](http://nvie.com/posts/a-successful-git-branching-model/), with a rebase-based workflow as documented below.<br>
 A git extension can be found [here](https://github.com/petervanderdoes/gitflow-avh) and a short introduction of it [here](https://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/).
 
@@ -106,21 +110,41 @@ The main branch should be `main` instead of `master`.
 Additional to the established git-flow branches, `fix` branches can be used similar to `feature` branches,
 for working on bugfixes that should be reviewed before being merged into `develop` again.
 
-### Use rebase
+For the rest of this document, unless explicitly specified otherwise, the term "feature branch" refers to all `feature`/`hotfix`/`fix` branches.
 
-When working on a `feature`, `fix` or `hotfix` git-flow branch, **do not merge the target branch back into your branch**. Instead, **rebase on the target branch**. The only exception to this rule is if you are working on a branch where such a merge happened before the rule got introduced, and you would have to replay a merge commit while rebasing.
+#### Use `rebase`
 
-Regularly rebase these branches on the target branch during development. You must **rebase before code review**, and again **before performing the merge**. This is because unless branches are based on the tip of your target branch, once merged, the tip won't be the code you tested, but a merge product - and even with a clean rebase with no conflicts, there could be regressions.
+When working on a feature branch:
+- **do not merge the target branch back into your branch**.
+- Instead, **rebase on the target branch**.
+The **only exception** to this rule is if you are working on a feature branch where such a merge happened before the rule got introduced, and you would have to replay a merge commit while rebasing.
 
-When collaborating on a branch (or simply pulling in changes made as part of the review process), use the same workflow. Instead of `git pull`, use `git pull --rebase`, instead of `git push` use `git push --force-with-lease` (you may want to alias this to `git please`).
+#### Rebase continuously
 
-When merging a git-flow branch as described above, **always use the Forgejo (or GitHub) UI to merge a PR**. Do NOT use the `git-flow` tooling to finish branches, as it will not only merge locally, but also delete your local branch.
+Regularly rebase feature branches on the target branch during development.
+
+You must **rebase before code review**, and again **before performing the merge**.
+
+This is because unless branches are based on the tip of your target branch, once merged, the tip won't be the code you tested, but a merge product - and even with a clean rebase with no conflicts, there could be regressions.
+
+#### Collaboration
+
+When collaborating on a branch (or simply pulling in changes made as part of the review process), use the same workflow:
+- Instead of `git pull`, use `git pull --rebase`.
+- Instead of `git push` use `git push --force-with-lease`.
+  - You may want to alias this to `git please`.
+
+#### Merging
+
+When merging a feature branch, **always use the Forgejo (or GitHub) UI** to merge a PR. Do NOT use the `git-flow` tooling to finish branches, as it will not only merge locally, but also delete your local branch.
 
 The only exception is when working on an old branch that the target branch was merged back into before the policy change introducing the rebase workflow (if it happened later, I hope you like re-resolving any conflicts and also maybe [picking cherries](https://git-scm.com/docs/git-cherry-pick)). In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
 
 #### How to implement this workflow
 
-If you are used to working with conventional merges, then this workflow may seem intimidating. Fortunately, there are many parallels:
+If you are used to working with conventional merges, then this workflow may seem intimidating. Fortunately, there are many parallels.
+
+##### Cheat sheet
 
 - Instead of `git merge <target-branch>` to get recent changes from the target branch, do `git rebase <target-branch>`
   - Be aware that because of how `rebase` works, this might give you more than one set of conflicts, one for each commit in your branch, in contrast to `merge`, where you resolve everything at once.
@@ -129,6 +153,8 @@ If you are used to working with conventional merges, then this workflow may seem
   - Do **NOT** do `git push --force` **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
 
 You should understand what a rebase does instead of following this cheat sheet blindly, but rest assured, it's not black magic, and not much actually changes.
+
+##### Aliases over config
 
 The previous version of these docs recommended configuring some git commands to do the right thing by default; however, with the new workflow, this makes less sense, the common behaviors aren't necessarily sane defaults (a `git pull` while on `develop` to pull in new changes should error if you accidentally added a commit there instead of a branch). In general, rebasing, while safe if done correctly, should be a conscious choice.
 
