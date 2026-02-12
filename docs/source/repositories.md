@@ -11,7 +11,7 @@ what the different repos are used for:
 - [config](https://github.com/base-angewandte/config): contains common configuration settings and generators for
   new project scaffolds.
 - [pre-commit-hooks](https://github.com/base-angewandte/pre-commit-hooks): contains all our pre-commit hooks,
-  we use in backend projects for linting and streamlining code quality assurance. See [](./dev_guide.md) for details
+  we use in backend projects for linting and streamlining code quality assurance. See [](./dev_guide.md) and [](./using_git.md) for details
   on how we code and commit.
 - [nginx](https://github.com/base-angewandte/nginx): contains the setup for running nginx as a reverse proxy for our
   actual applications.

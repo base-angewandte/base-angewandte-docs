@@ -49,58 +49,7 @@ Here are the steps to install everything you will need to work with the _base_ c
      to the group `docker`, e.g. with `sudo usermod -a -G docker myusername`. Start a new
      terminal session afterward, so that the group info is updated in the environment.
 5. Set up git
-
-   - Before committing, make sure to check/update your git configuration:
-
-     - You should at least update your **user name** and **email** to what you would like to show up in the published commits.
-     - Our **default branch is `main`**, which might not be the case with older git versions.
-       - But you probably want to check out `develop`, as that represents the newest state of development; `main` is for releases
-     - We follow the **`git-flow` branching model**. Check the [Git section of the Development Guide](./dev_guide.md#git) for more details and a recommended git extension.
-     - For `feature`/`fix`/`hotfix` branches, we use `rebase`; do NOT merge the target branch (or any other branch) back into the branch you are working on! Instead, use `git rebase target-branch`. Again, see the [Git section of the Development Guide](./dev_guide.md#git) for more details.
-     - Always use the Forgejo/GitHub UI for merging these branches!
-
-     Here is how to check and update the corresponding settings:
-
-     ```bash
-     # check your git config
-     git config --global user.name
-     git config --global user.email
-     git config --global init.defaultBranch
-     # update the settings (careful: applies to all repos!)
-     git config --global user.name "Ms. Robot"
-     git config --global user.email "ro@example.org"
-     git config --global init.defaultBranch "main"
-     ```
-
-     ```{warning}
-     Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
-     ```
-
-     Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
-     `editor ~/.gitconfig`). Here is a template including some handy shortcuts for git:
-
-     ```ini
-     [user]
-         email = ro@example.org
-         name = Ms. Robot
-     [alias]
-         co = checkout
-         ci = commit
-         st = status
-         br = branch
-         hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-         type = cat-file -t
-         dump = cat-file -p
-         please = push --force-with-lease
-         pure = pull --rebase
-
-     [core]
-         # leave this one out, if you want to keep the standard (nano), or change
-         # to your preferred editor
-         editor = vim
-     [init]
-         defaultBranch = main
-     ```
+   - Follow the instructions in [the setup section of the git guide](./using_git.md#setup) to set up `git`.
 
 Now you have a basic setup, except for an IDE you might want to use to work on code.
 We mostly use PyCharm for backend and WebStorm for frontend stuff, but any other preferred IDE can be used,
