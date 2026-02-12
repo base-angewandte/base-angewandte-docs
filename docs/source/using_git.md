@@ -119,6 +119,8 @@ When working on a feature branch:
 - Instead, **rebase on the target branch**.
 The **only exception** to this rule is if you are working on a feature branch where such a merge happened before the rule got introduced, and you would have to replay a merge commit while rebasing.
 
+**Collaborating on the same branch is NOT an exception to this rule**, see [](#collaboration).
+
 #### Rebase continuously
 
 Regularly rebase feature branches on the target branch during development.
@@ -133,6 +135,8 @@ When collaborating on a branch (or simply pulling in changes made as part of the
 - Instead of `git pull`, use `git pull --rebase`.
 - Instead of `git push` use `git push --force-with-lease`.
   - You may want to alias this to `git please`.
+
+Note that this is a relaxation of the often-cited "golden rule of rebasing" not to ever rebase a public branch. **This is intentional**, and because we recognize that as long as `pull --rebase` and `push --force-with-lease` are consistently used, the workflow is equivalent - and doesn't lead to merge commits in feature branches, which we do not want to have.
 
 #### Merging
 
