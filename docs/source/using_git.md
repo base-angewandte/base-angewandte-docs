@@ -1,30 +1,33 @@
 # Using Git and Forgejo
 
 There is a lot of information about how we use Git and Forgejo, so it all lives
-in one place here in order to be easy to find, and not bloat the relevant parts
-of the other sections.
+in one place here in order to be easy to find, and avoid bloating the relevant
+parts of the other sections.
 
 The other sections refer to this document, so you may want to read them first
 and return here with more context. Just be aware that you should definitely do
-so and become familiar with our workflow before contributing.
+so and **become familiar with our workflow before contributing**, especially as
+it's tailored to our specific requirements, and therefore likely not what you
+expect.
 
 ## Philosophy and informal tl;dr
 
 As a quick intro and contextualization:
-- We see `git` as a tool to create a curated history of changes, not as a tool
-  to document the development process.
-  - This means that we implement a **workflow based on `git rebase`**, and don't
-    care about rewriting history.
-  - The exception to this rule are **`main` and `develop`** (see below). These
-    branches are treated as **immutable history**.
+
 - We have development instances that reflect the latest state of development,
   which we also use for user acceptance testing. Production instances run code
   that has been deemed ready for production deployment.
-  - This means that despite usually being overkill for developing web
-    applications, **`git-flow` is useful to us, and we implement it**.
-  - It also means that while it's somewhat less critical that **`develop`** be in
-    a perfect state than `main`, it **should be treated as a production branch**
+  - This means that despite usually being overkill for developing rolling
+    release web applications, **we implement `git-flow`** as there are concrete
+    benefits for us.
+  - It also means that while it's somewhat less critical that `develop` be in a
+    perfect state than `main`, it **should be treated as a production branch**
     just the same.
+- We see `git` as a tool to create a curated and easy to understand history of
+  changes, not as a tool to document the development process.
+  - This means that we implement a **workflow based on `git rebase`**, and don't
+    care about rewriting history for changes that are still in development.
+  - **`main` and `develop`** are of course treated as **immutable history**.
 - Our test coverage is (depending on the project) far from complete at best,
   nonexistent at worst. We are working on CI infrastructure, but as of 2026-02,
   it is in its infancy.
@@ -46,55 +49,56 @@ As a quick intro and contextualization:
 ## Setup
 
 Before committing, make sure to check/update your git configuration:
+
 - You should at least update your **user name** and **email** to what you would like to show up in the published commits.
-- Our **default branch is `main`**, which might not be the case with older git versions.
-  - But you probably want to check out `develop`, as that represents the newest state of development; `main` is for releases
+- Our default branch is `main`, which might not be the case with older git versions.
+  - But **you probably want to check out `develop`**, as that represents the newest state of development; `main` is for releases
 - We follow the **`git-flow` branching model**. Check [](#development) for more details and a recommended git extension.
-  - For `feature`/`fix`/`hotfix` branches, we use `rebase`; do NOT merge the target branch (or any other branch) back into the branch you are working on! Instead, use `git rebase target-branch`. Again, see [](#development) for more details.
-  - Always use the Forgejo/GitHub UI for merging these branches!
+  - For `feature`/`fix`/`hotfix` branches, we use `rebase`; **do NOT merge the target branch (or any other branch) back into the branch you are working on!** Instead, use `git rebase target-branch`. Again, see [](#development) for more details.
+  - **Always use the Forgejo/GitHub UI for merging these branches!**
 
 Here is how to check and update the corresponding settings:
 
- ```bash
- # check your git config
- git config --global user.name
- git config --global user.email
- git config --global init.defaultBranch
- # update the settings (careful: applies to all repos!)
- git config --global user.name "Ms. Robot"
- git config --global user.email "ro@example.org"
- git config --global init.defaultBranch "main"
- ```
+```bash
+# check your git config
+git config --global user.name
+git config --global user.email
+git config --global init.defaultBranch
+# update the settings (careful: applies to all repos!)
+git config --global user.name "Ms. Robot"
+git config --global user.email "ro@example.org"
+git config --global init.defaultBranch "main"
+```
 
- ```{warning}
- Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
- ```
+```{warning}
+Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
+```
 
- Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
- `editor ~/.gitconfig`). Here is a template including some handy shortcuts for git:
+Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
+`editor ~/.gitconfig`). Here is a template including some handy shortcuts for git:
 
- ```ini
- [user]
-     email = ro@example.org
-     name = Ms. Robot
- [alias]
-     co = checkout
-     ci = commit
-     st = status
-     br = branch
-     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-     type = cat-file -t
-     dump = cat-file -p
-     please = push --force-with-lease
-     pure = pull --rebase
+```ini
+[user]
+    email = ro@example.org
+    name = Ms. Robot
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    please = push --force-with-lease
+    pure = pull --rebase
 
- [core]
-     # leave this one out, if you want to keep the standard (nano), or change
-     # to your preferred editor
-     editor = vim
- [init]
-     defaultBranch = main
- ```
+[core]
+    # leave this one out, if you want to keep the standard (nano), or change
+    # to your preferred editor
+    editor = vim
+[init]
+    defaultBranch = main
+```
 
 ## Development
 
@@ -115,9 +119,10 @@ For the rest of this document, unless explicitly specified otherwise, the term "
 #### Use `rebase`
 
 When working on a feature branch:
+
 - **do not merge the target branch back into your branch**.
 - Instead, **rebase on the target branch**.
-The **only exception** to this rule is if you are working on a feature branch where such a merge happened before the rule got introduced, and you would have to replay a merge commit while rebasing.
+  The **only exception** to this rule is if you are working on a feature branch where such a merge happened **before the rule got introduced**, and you would have to replay a merge commit while rebasing.
 
 **Collaborating on the same branch is NOT an exception to this rule**, see [](#collaboration).
 
@@ -125,13 +130,14 @@ The **only exception** to this rule is if you are working on a feature branch wh
 
 Regularly rebase feature branches on the target branch during development.
 
-You must **rebase before code review**, and again **before performing the merge**.
+At bare minimum, you must **rebase before code review**, and again **before performing the merge**.
 
 This is because unless branches are based on the tip of your target branch, once merged, the tip won't be the code you tested, but a merge product - and even with a clean rebase with no conflicts, there could be regressions.
 
 #### Collaboration
 
 When collaborating on a branch (or simply pulling in changes made as part of the review process), use the same workflow:
+
 - Instead of `git pull`, use `git pull --rebase`.
 - Instead of `git push` use `git push --force-with-lease`.
   - You may want to alias this to `git please`.
@@ -140,7 +146,7 @@ Note that this is a relaxation of the often-cited "golden rule of rebasing" not 
 
 #### Merging
 
-When merging a feature branch, **always use the Forgejo (or GitHub) UI** to merge a PR. Do NOT use the `git-flow` tooling to finish branches, as it will not only merge locally, but also delete your local branch.
+When merging a feature branch, **always use the Forgejo (or GitHub) UI** to merge a PR. **Do NOT use the `git-flow` tooling to finish branches**, as it will not only merge locally, but also delete your local branch.
 
 The only exception is when working on an old branch that the target branch was merged back into before the policy change introducing the rebase workflow (if it happened later, I hope you like re-resolving any conflicts and also maybe [picking cherries](https://git-scm.com/docs/git-cherry-pick)). In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
 
@@ -160,7 +166,7 @@ You should understand what a rebase does instead of following this cheat sheet b
 
 ##### Aliases over config
 
-The previous version of these docs recommended configuring some git commands to do the right thing by default; however, with the new workflow, this makes less sense, the common behaviors aren't necessarily sane defaults (a `git pull` while on `develop` to pull in new changes should error if you accidentally added a commit there instead of a branch). In general, rebasing, while safe if done correctly, should be a conscious choice.
+The previous version of these docs recommended configuring some git commands to do the right thing by default; however, with the new workflow, this makes less sense, the common behaviors aren't necessarily sane defaults (a `git pull` while on `develop` to pull in new changes should error if you accidentally added a commit there instead of a new branch). In general, rebasing, while safe if done correctly, should be a conscious choice.
 
 However, there are some aliases in [](#setup) that we'd recommend for ergonomics instead! And of course, you can also define your own.
 
