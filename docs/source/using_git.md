@@ -173,6 +173,27 @@ When merging a feature branch, **always use the Forgejo (or GitHub) UI** to merg
 
 The only exception is when working on an old branch that the target branch was merged back into before the policy change introducing the rebase workflow (if it happened later, I hope you like re-resolving any conflicts and also maybe [picking cherries](https://git-scm.com/docs/git-cherry-pick)). In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
 
+#### Create feature branches based on `main` or `develop`
+
+ie: **Do not create feature branches based on other feature branches**.
+
+This rule is less strict than the other ones. Developing a set of related experimental changes in tandem with each other locally can be a great way to realize how these changes will interact in practice, and later factoring these changes into multiple PRs with a smaller scope is actually a very good idea.
+
+However, **never open a PR with a feature branch as a target**.
+
+Instead, if you want to make a PR targeting a feature branch:
+
+- open the PR as a WIP targeting `main` or `develop` to keep track of it
+- only open it for review once it only contains the changes that are in-scope for the PR
+- make sure to regularly rebase it on the feature branch in the meantime
+  - just because the PR needs to target `main` or `develop` doesn't mean that you can't still do that!
+
+##### Prioritize code review over chaining branches
+
+If this feels restrictive and like it blocks you from getting work done, **put your energy into code review instead**, contributing to an environment where code review happens quickly and is less of a bottleneck.
+
+If you request code review from a colleague and get a request for review from them more than once before they review your code, feel free to call them out on that. (Also, don't be that colleague.)
+
 #### How to implement this workflow
 
 If you are used to working with conventional merges, then this workflow may seem intimidating. Fortunately, there are many parallels.
