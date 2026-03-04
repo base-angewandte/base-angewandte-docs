@@ -32,19 +32,12 @@ As a quick intro and contextualization:
   nonexistent at worst. We are working on CI infrastructure, but as of 2026-02,
   it is in its infancy.
   - This means that **we rely on `pre-commit` for QA**. It's not just a tool to
-    avoid having to make changes due to CI failing, it IS currently our main
-    line of defense. **Using it is essential**.
-- Internally, for code review, we follow the principle that
-  - We **trust each other as professionals** to make correct calls taking into
-    account with the available info that was considered.
-  - We **do NOT trust** that, as we are humans, all relevant **info WAS available, or
-    considered**.
-  - So: We implement safeguards, but these safeguards are soft and
-    intentionally circumventable - **but only by intentional and explicit action**.
-    - For example, branch protection exists, but everyone has permission to
-      temporarily disable it.
-  - And in general, we apply **EAFP over LBYL**. Rules aren't technically enforced,
-    but if they are broken, there had better be a good reason for it.
+    avoid having to make changes due to CI failing, it **IS** currently our **only automated
+    line of defense** against common and easily preventable errors. While that is still the case, **using it is essential**.
+- Internally, for code review, we follow a **trust but verify** principle that assumes **good intentions but also human fallibility**.
+  Our safeguards are circumventable, but only intentionally and explicitly, and in a way that leaves a paper trail for accountability.
+  - For example, branch protection exists, but everyone has the ability to temporarily disable it.
+  - And in general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/). As in, rules aren't strictly enforced by technical means, but if they are broken, that needs to be justified, and there had better be a good reason for it.
 
 ## Setup
 
@@ -358,6 +351,243 @@ The changelog should follow the [Keep a Changelog guidelines](https://keepachang
 - `remove` → **Removed**
 - `fix` → **Fixed**
 - `security` → **Security**
+
+## Review process
+
+As the review process ties in closely with using Git, it is documented here.
+
+Internally, we use Forgejo, and a trust-based workflow. External contributors should read the [](#external-contributors) subsection.
+
+This section is meant as a rough guideline, not absolute gospel. Take it with a grain of salt, and adjust for context - just be prepared to explain why you did so.
+
+### Goals of code review
+
+There are multiple goals of code review:
+
+- **Quality assurance:** providing a second, unbiased look at the proposed changes to
+  - spot more issues before they can pop up in production
+  - uphold code quality standards
+- **Horizontal transfer of knowledge/skills** within the team
+- **Documenting the development process** - PRs are an excellent source of information for future developers wanting to understand **not just which changes** were made, but **what considerations** led to that specific solution
+- **BUT ALSO:** Getting the code merged!
+  - And ultimately, **this is the primary goal!**
+  - The **other goals** serve to implement **prerequisites** for that to happen, or provide some **additional benefit at little extra cost**
+    - For example, if quality standards aren't met, the code shouldn't be merged, making QA a prerequisite goal
+  - **Where pursuing another goal doesn't do that, if only for a future review, it is detrimental to the review process**
+
+### External contributors
+
+External contributors can **submit patches via GitHub**, for the projects that are mirrored there.
+
+If you are an external contributor: Welcome! Please **read the rest of this section**, even though not everything will apply to you, and treat this subsection as a list of differences.
+
+Obviously, we can't give you the same level of access as team members, much of the next subsection doesn't apply, and we'll use the **traditional open source model**.
+
+Not everyone is equally comfortable using `rebase`. If you aren't:
+
+- Consider doing [this interactive git tutorial](https://learngitbranching.js.org/) to familiarize yourself with how it works
+  - The [](#use-rebase) section above has a list of levels relevant to `rebase`!
+- Whatever you do, **DO NOT merge the target branch back into your own branch**
+  - PRs with such merge commits won't be accepted
+- If you need to replicate the effect of doing so, there's no way around performing a simple rebase. However:
+  - it should be as simple as (while on your branch)
+    - `git fetch origin develop:develop` (or `git fetch origin main:main`)
+    - `git rebase develop` (or `git rebase main`)
+    - `git push --force-with-lease`
+  - if it isn't that simple, ask us for help!
+- If you're done and the only thing left to do is to rebase before merging, let us know and we'll do that for you!
+
+### EAFP/Trust-based model
+
+(This doesn't apply to external contributors.)
+
+As we are a team of professionals, we explicitly depart from the traditional open source model in that there is **no strict separation between contributor and maintainer**, or author and reviewer in general. Instead, we treat **code review as a trust-based collaborative process**. While the author of a PR is responsible for getting the changes merged by default, and often will be the sole contributor of concrete code changes in the end, this is for practical reasons rather than because of policy.
+
+#### Some general principles
+
+- We **trust each other as professionals** to make correct calls taking into account the available info that was considered.
+- We **do NOT trust** that, as we are fallible humans, all relevant **info WAS available, or considered**.
+- So: We implement safeguards, but these safeguards are soft and intentionally circumventable - **but only by intentional and explicit action**.
+  - For example, branch protection exists, but everyone has permission to temporarily disable it.
+  - Basic assumption: **if it can be forgotten without noticing that anything is wrong, it will be**.
+- In general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/).
+  - Because when it's humans executing the "code", LBYL is like introducing a network request for every `assert`.
+- For accountability regarding the last point, **deviations from standard procedure must be documented**.
+
+### Workarounds
+
+(This only partially applies to external contributors.)
+
+Unfortunately, Forgejo is somewhat geared to that traditional open source model, and a bit all-or-nothing regarding safeguards. That means that we need some workarounds.
+
+#### We're all admins
+
+In order to make sure that we have the final say and can do what we need to, we're all repository admins for our projects.
+
+#### Admins can bypass branch protection
+
+This means that even if there are blockers that should prevent a merge, the UI will offer you to do a merge anyway.
+
+**DO NOT DO THIS without a very good reason**. If the merge button is red, and you think that merging is necessary for some reason:
+
+- first, reconsider.
+- then, if you're sure regardless:
+  - unless it's extremely time-critical (like a critical security hotfix): put a brief message in the team chat, giving everyone who is present at least 15 minutes to raise concerns.
+  - for every blocker Forgejo shows:
+    - document in a comment why you are ignoring that blocker and merging anyway.
+    - remove the blocker if possible (eg. by disregarding reviews) in case Forgejo isn't showing all of them at once.
+  - do a manual check for any unresolved comment threads, and resolve them with a comment stating why.
+  - double-check the team chat for replies to your message
+  - unless there are objections, perform the rebase
+
+#### Treat unresolved comment threads as blockers
+
+Forgejo won't treat unresolved comment threads as blockers, only code reviews requesting changes.
+
+You should treat them as blockers anyway, even if they are not attached to a review requesting changes by mistake.
+
+#### Always request changes if you are leaving a resolvable thread
+
+This is so that the author sees a blocker and doesn't accidentally merge.
+
+On the other hand, feel free to dismiss reviews requesting changes if and only if all threads it introduced are resolved, and the review comment itself has been addressed.
+
+#### Use resolvable review comments
+
+Use resolvable review comments extensively.
+
+Comments only result in a resolvable item if they are made on the diff of the PR somewhere.
+
+**So, do that, even if it doesn't relate to a specific change in the diff, you can use a random location** - and note in your comment that it is unrelated to the diff.
+
+#### Examples
+
+Some examples for comments that should be blockers that don't relate to a (specific) current line in the diff:
+
+- "We need PR #42069 to be merged before merging this. Before resolving, make sure that this PR is merged and this branch is rebased on current `develop`"
+- "I have doubts about `<X general design decision spanning many specific changes>`, what is your reasoning, and what alternatives did you consider?"
+- Any comments about the absence of important changes, like:
+  - "This PR needs tests"
+  - "You forgot to make a migration for your model change"
+- "I am worried about a regression with `<Y feature that is implemented somewhere completely different>`"
+- "This PR is just one huge commit, please do an interactive rebase, split up the commit into multiple smaller ones, and make it reviewable"
+
+#### Resolving comments
+
+The default assumption when a reviewer creates a resolvable thread is that the reviewer will resolve it when the issue it raises has been addressed to their satisfaction.
+
+Deviations from this are made explicit, some examples:
+
+- "I think this would be more readable as a list comprehension, but that's a matter of taste, feel free to resolve if you disagree"
+- "I think X change would be a good idea here, but also, that's out of scope for this PR - feel free to resolve after making a followup issue"
+- "This PR needs <other PR> to be merged first, if that's happened, feel free to resolve this"
+
+##### Notify reviewers when you're done
+
+As an author, notify reviewers when you've implemented the changes that were requested by replying to the thread.
+
+#### Comments by authors
+
+Comment threads can also be made by the author of a PR if they notice something on their own. These threads can be resolved by the PR author, and the list of unresolved comments used as a todo list.
+
+### Merging
+
+When merging, **always do a rebase + merge commit via the Forgejo UI**.
+
+Do not merge PRs without review from at least one colleague, unless it's an urgent hotfix.
+
+Merges are done by the reviewer by default, but the reviewer can give conditional consent otherwise. Examples:
+
+- "Apart from the missing migration and the typo in the docs, LGTM. Feel free to merge on pipeline success once that is done."
+- "LGTM, but it's Friday afternoon, let's not merge this now. I'm on vacation next week, but feel free to merge first thing Monday morning!"
+
+### Using issues
+
+You can use issues, if you want, but it's also OK to just make placeholder branches with WIP PRs attached immediately, and keep track of everything there.
+
+### WIP PRs
+
+All PRs that, to the best of the knowledge of their author, **aren't ready to be merged, should be marked as WIP**. However, you should never assume that a colleague didn't simply forget to revert the PR to WIP state.
+
+Before being marked as ready for review for the first time, there are **no rules for the content of WIP PRs**. They can contain experimental changes, 100 unsquashed microcommits that lead to a +2/-1 diff, no changes at all, 100 slightly different instances of the same +1728/-1337 change that has been force-pushed with slight alterations until CI passed, all of the above over the course of their lifespan, or whatever else supports the personal workflow of the authoring team member.
+
+Unless a colleague has requested a pre-review of an almost-ready WIP PR, do not complain about what you see when you make the choice to look at it. **We are accountable for what we choose to present, not how we get there**.
+
+After being marked as ready for review for the first time, PRs should at least more or less follow standards of reviewability, even when put back into WIP state while changes are being made.
+
+Respect the fact that your fellow team members might now have a starting point/mental model to look at future changes to the PR from, and don't completely alter the history (although squashing changes into the commits they should have been a part of initially is still a really good idea).
+
+### Standards of reviewability
+
+PRs marked as ready should
+
+- target `main` or `develop`
+- not contain commits that are to be merged as part of another PR
+
+All commits should pass `pre-commit` checks, unless they are part of a WIP while changes are being made after review.
+
+CI should already have passed, or changes since the last time CI passed should be minimal, and the CI jobs queued or running.
+
+The PR branch should be rebased on its target at the time the PR is marked as ready.
+
+History should be in a reviewable state. This is subject to author ability, but ideally:
+
+- If large changes were made and then undone/redone, these changes should probably be squashed
+  - This is so that reviewers that go commit by commit don't have to read multiple versions of the same changes, and delete pending comments as they realize that their requested change was already made in a later commit
+  - The same applies to future developers trying to understand the history
+  - Remember: Our goal is to create a curated and easy to understand history, not to document the development process
+- Changes should follow the [](#commit-guidelines)
+
+The scope of the changes should be minimal. If the PR is decomposable into two PRs that make sense individually, then it should be split up.
+
+The PR should not make test coverage worse:
+
+- if new behavior is implemented, it should be covered by tests
+- if existing behavior is changed significantly, and it wasn't covered by tests before, tests should be added
+- for complex refactors, tests should be added before the refactor happens, and pass on both the old and new version of the code
+- trivial changes/refactors don't need new tests
+- hotfixes never need tests, but depending on the nature of the hotfixes, they should be added in a followup PR
+
+#### A caveat
+
+Don't take this subsection too seriously, and use common sense. When in doubt, apply the spirit of the rules, not the letter, and account for context.
+
+Ultimately, the goal here is to make code review less frustrating for everyone involved, not to add barriers.
+
+Remember the goals of code review discussed above, and make sure that your actions are in line with them.
+
+### Code ownership and etiquette
+
+Including and especially when it comes to review, **there is no "your" code; there is only OUR code, and your contributions to it**.
+
+You should be willing to embrace constructive criticism as a way to improve as a developer. In particular, technical concerns are ALWAYS more important than developer egos.
+
+On the other hand, criticism should be constructive, and either impersonal or framed positively. Within those bounds, clarity of communication trumps politeness, and you should not minimize the potential negative outcomes of a proposed solution to make a colleague feel better. However, you should also not assume ill intent, and in general, **while you can and should be as _blunt_ as you need to be to convey your concerns, _don't be derogatory on a personal level_**.
+
+When reading a review that feels harsh, re-read this section and remind yourself that your reviewer was probably following it.
+
+When reviewing, make sure that you keep the goals of code review as discussed above in mind (especially the last one):
+
+- Don't unnecessarily nitpick, and as far as possible, separate personal taste from technical concerns.
+  - There's a fine line here, when walking it, also consider making comments but marking the suggested changes as optional/"feel free to disagree and just resolve".
+  - If you think that someone might not have been aware of an applicable and generally useful approach, that should push you towards suggesting the change.
+- In particular, don't block merges JUST for tiny improvements like eg. variable name changes or slight optimizations where performance isn't critical. If you have the choice to either merge a PR or request such a change, merge the PR, then make the change yourself in a new PR, allowing everyone else to base their work on the meat of the first PR.
+  - If you do so, consider assigning the initial PR author as a reviewer
+    - If that happens to you, be happy that your code got merged and you didn't have to make the change yourself!
+  - If other changes are needed anyway, no harm in having some minor items as well
+  - In general, weigh the value of making a change now against the value of merging the PR now
+
+```{warning}
+All of that said, **err on the side of speaking up if you think that a change shouldn't be merged in its current state**.
+```
+
+#### Disagreements
+
+Remember that just because you're in the role of a reviewer, that doesn't make your opinion more valid than the author's. **You are collaborating, not gatekeeping.**
+
+You can disagree with the author's chosen solution, but the author can disagree with your proposed alternative just the same.
+
+If that happens, instead of trying to "win"™ the discussion, try to isolate what you fundamentally disagree about, and get a third opinion from another team member.
 
 ## Tools
 
