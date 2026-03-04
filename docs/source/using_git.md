@@ -126,6 +126,27 @@ When working on a feature branch:
 
 **Collaborating on the same branch is NOT an exception to this rule**, see [](#collaboration).
 
+##### An awesome git tutorial
+
+If you're not comfortable with using rebase yet, consider following [this awesome interactive tutorial](https://learngitbranching.js.org/) to become familiar with the concept! If you're already an experienced git user, the **relevant lessons for `rebase` (and `cherry-pick`)** are:
+
+- Main: Introduction Sequence:
+  - Level 4: Rebase Introduction
+- Main: Moving Work Around:
+  - All levels
+- Main: A Mixed Bag:
+  - Level 1: Grabbing Just 1 Commit
+  - Level 2: Juggling Commits
+  - Level 3: Juggling Commits #2
+- Main: Advanced Topics:
+  - Level 1: Rebasing over 9000 times
+  - Level 3: Branch Spaghetti
+- Remote: Push & Pull -- Git Remotes!:
+  - Level 7: Diverged History
+- Remote: To Origin And Beyond -- Advanced Git Remotes!
+  - Level 1: Push Main!
+  - Level 2: Merging with remotes _(only for contrast with the rebase approach, and perhaps as a demonstration of why we use the rebase approach)_
+
 #### Rebase continuously
 
 Regularly rebase feature branches on the target branch during development.
@@ -163,6 +184,8 @@ If you are used to working with conventional merges, then this workflow may seem
   - Do **NOT** do `git push --force` **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
 
 You should understand what a rebase does instead of following this cheat sheet blindly, but rest assured, it's not black magic, and not much actually changes.
+
+If you don't understand rebase yet, see the [](#use-rebase) subsection above for an interactive tutorial.
 
 ##### Aliases over config
 
