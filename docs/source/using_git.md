@@ -526,7 +526,7 @@ PRs marked as ready should
 
 All commits should pass `pre-commit` checks, unless they are part of a WIP while changes are being made after review.
 
-CI should already have passed, or changes since the last time CI passed should be minimal, and the CI jobs queued or running.
+CI should already have passed, or changes since the last time CI passed should be minimal, and the CI jobs queued or running. (For projects that don't have CI yet, consider that any given statement is true for all members of the empty set, and draw your conclusions.)
 
 The PR branch should be rebased on its target at the time the PR is marked as ready.
 
