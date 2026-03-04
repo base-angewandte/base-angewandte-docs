@@ -155,6 +155,8 @@ At bare minimum, you must **rebase before code review**, and again **before perf
 
 This is because unless branches are based on the tip of your target branch, once merged, the tip won't be the code you tested, but a merge product - and even with a clean rebase with no conflicts, there could be regressions.
 
+External contributors who aren't comfortable with rebase need not do this.
+
 #### Collaboration
 
 When collaborating on a branch (or simply pulling in changes made as part of the review process), use the same workflow:
