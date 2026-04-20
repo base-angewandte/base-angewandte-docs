@@ -46,7 +46,7 @@ Before committing, make sure to check/update your git configuration:
 - You should at least update your **user name** and **email** to what you would like to show up in the published commits.
 - Our default branch is `main`, which might not be the case with older git versions.
   - But **you probably want to check out `develop`**, as that represents the newest state of development; `main` is for releases
-- We follow the **`git-flow` branching model**. Check [](#development) for more details and a recommended git extension.
+- We follow the **`git-flow` branching model**. Check [](#development) for more details.
   - For `feature`/`fix`/`hotfix` branches, we use `rebase`; **do NOT merge the target branch (or any other branch) back into the branch you are working on!** Instead, use `git rebase target-branch`. Again, see [](#development) for more details.
   - **Always use the Forgejo/GitHub UI for merging these branches!**
 
@@ -99,8 +99,7 @@ Alternatively you can also directly edit the _.gitconfig_ file in your home dire
 
 #### `git-flow`
 
-Follow the [git-flow branching model](http://nvie.com/posts/a-successful-git-branching-model/), with a rebase-based workflow as documented below.<br>
-A git extension can be found [here](https://github.com/petervanderdoes/gitflow-avh) and a short introduction of it [here](https://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/).
+Follow the [git-flow branching model](http://nvie.com/posts/a-successful-git-branching-model/), with a rebase-based workflow as documented below.
 
 The main branch should be `main` instead of `master`.
 
@@ -162,7 +161,7 @@ Note that this is a relaxation of the often-cited "golden rule of rebasing" not 
 
 #### Merging
 
-When merging a feature branch, **always use the Forgejo (or GitHub) UI** to merge a PR. **Do NOT use the `git-flow` tooling to finish branches**, as it will not only merge locally, but also delete your local branch.
+When merging a feature branch, **always use the Forgejo (or GitHub) UI** to merge a PR.
 
 The only exception is when working on an old branch that the target branch was merged back into before the policy change introducing the rebase workflow (if it happened later, I hope you like re-resolving any conflicts and also maybe [picking cherries](https://git-scm.com/docs/git-cherry-pick)). In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
 

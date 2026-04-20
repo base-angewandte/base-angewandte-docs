@@ -12,7 +12,7 @@ Here are the steps to install everything you will need to work with the _base_ c
 
 1. Install some basic packages needed in our setup:
    - ```
-     sudo apt install curl git git-flow build-essential libssl-dev \
+     sudo apt install curl git build-essential libssl-dev \
        libffi-dev zlib1g-dev libsqlite3-dev liblzma-dev libbz2-dev \
        libncurses5-dev libreadline-dev tk8.6-dev
      ```
