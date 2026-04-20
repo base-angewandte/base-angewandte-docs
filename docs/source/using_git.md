@@ -507,7 +507,7 @@ Bear in mind that at the time of this writing, it's impossible to filter PRs by 
 
 ### WIP PRs
 
-PRs that **aren't ready for review yet should be marked as WIP**. It's encouraged to mark PRs as WIP again if something comes up that means that they shouldn't be merged in their current state, however, this isn't required - you can also simply create a blocker/review comment.
+PRs that **aren't ready for review yet should be marked as WIP**. It's encouraged to mark PRs as WIP again if something comes up that means that they shouldn't be merged in their current state, however, this isn't required - you can also simply create a blocker/review comment. Just ensure somehow that your colleagues won't accidentally merge the PR.
 
 Before being marked as ready for review for the first time, there are **no rules for the content of WIP PRs**. They can contain experimental changes, 100 unsquashed microcommits that lead to a +2/-1 diff, no changes at all, 100 slightly different instances of the same +1728/-1337 change that has been force-pushed with slight alterations until CI passed, all of the above over the course of their lifespan, or whatever else supports the personal workflow of the authoring team member.
 
