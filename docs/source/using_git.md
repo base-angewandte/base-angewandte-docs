@@ -501,7 +501,7 @@ Merges are done by the reviewer by default, but the reviewer can give conditiona
 
 ### Using issues
 
-You're encouraged to use issues, especially if you aren't starting to work on a task yet. However, you're also free to make placeholder branches with WIP PRs attached so that all relevant info can be in one place.
+You're encouraged to use issues, especially if you aren't starting to work on a task yet. However, you're also free to make WIP PRs for branches right from the start (or even as placeholders for future development) so that all relevant info can be in one place, especially if you'd like to use the PR to eg. make notes on the diff/run CI/have an overview of your changes.
 
 Bear in mind that at the time of this writing, it's impossible to filter PRs by their WIP status in Forgejo, so avoid cluttering the project with too many of them.
 
