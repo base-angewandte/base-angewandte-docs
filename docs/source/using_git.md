@@ -503,6 +503,8 @@ Merges are done by the reviewer by default, but the reviewer can give conditiona
 
 You're encouraged to use issues, especially if you aren't starting to work on a task yet. However, you're also free to make placeholder branches with WIP PRs attached so that all relevant info can be in one place.
 
+Bear in mind that at the time of this writing, it's impossible to filter PRs by their WIP status in Forgejo, so avoid cluttering the project with too many of them.
+
 ### WIP PRs
 
 PRs that **aren't ready for review yet should be marked as WIP**. It's encouraged to mark PRs as WIP again if something comes up that means that they shouldn't be merged in their current state, however, this isn't required - you can also simply create a blocker/review comment.
