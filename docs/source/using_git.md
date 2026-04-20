@@ -4,11 +4,16 @@ There is a lot of information about how we use Git and Forgejo, so it all lives
 in one place here in order to be easy to find, and avoid bloating the relevant
 parts of the other sections.
 
+```{tip}
 The other sections refer to this document, so you may want to read them first
-and return here with more context. Just be aware that you should definitely do
-so and **become familiar with our workflow before contributing**, especially as
-it's tailored to our specific requirements, and therefore likely not what you
-expect.
+and return here with more context.
+```
+
+```{important}
+Just be aware that you should definitely do so and **become familiar with our
+workflow before contributing**, especially as it's tailored to our specific
+requirements, and therefore likely not what you expect.
+```
 
 ## Philosophy and informal tl;dr
 
@@ -116,7 +121,9 @@ When working on a feature branch:
 - Instead, **rebase on the target branch**.
   The **only exception** to this rule is if you are working on a feature branch where such a merge happened **before the rule got introduced**, and you would have to replay a merge commit while rebasing.
 
+```{important}
 **Collaborating on the same branch is NOT an exception to this rule**, see [](#collaboration).
+```
 
 ```{tip}
 ##### An awesome git tutorial
@@ -149,7 +156,9 @@ At bare minimum, you must **rebase before code review**, and again **before perf
 
 This is because unless branches are based on the tip of your target branch, once merged, the tip won't be the code you tested, but a merge product - and even with a clean rebase with no conflicts, there could be regressions.
 
+```{note}
 External contributors who aren't comfortable with rebase need not do this.
+```
 
 #### Collaboration
 
@@ -159,13 +168,23 @@ When collaborating on a branch (or simply pulling in changes made as part of the
 - Instead of `git push` use `git push --force-with-lease`.
   - You may want to alias this to `git please`.
 
-Note that this is a relaxation of the often-cited "golden rule of rebasing" not to ever rebase a public branch. **This is intentional**, and because we recognize that as long as `pull --rebase` and `push --force-with-lease` are consistently used, the workflow is equivalent - and doesn't lead to merge commits in feature branches, which we do not want to have.
+```{note}
+This is a relaxation of the often-cited "golden rule of rebasing" not to ever rebase a public branch.
+
+**This is intentional**, and because we recognize that as long as `pull --rebase` and `push --force-with-lease` are consistently used, the workflow is equivalent - and doesn't lead to merge commits in feature branches, which we do not want to have.
+```
 
 #### Merging
 
 When merging a feature branch, **always use the Forgejo (or GitHub) UI** to merge a PR.
 
-The only exception is when working on an old branch that the target branch was merged back into before the policy change introducing the rebase workflow (if it happened later, I hope you like re-resolving any conflicts and also maybe [picking cherries](https://git-scm.com/docs/git-cherry-pick)). In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
+The only exception is when working on an old branch that the target branch was merged back into before the policy change introducing the rebase workflow.
+
+```{warning}
+If it happened later, I hope you like re-resolving any conflicts and also maybe [picking cherries](https://git-scm.com/docs/git-cherry-pick).
+```
+
+In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
 
 #### Create feature branches based on `main` or `develop`
 
@@ -179,8 +198,12 @@ Instead, if you want to make a PR targeting a feature branch:
 
 - open the PR as a WIP targeting `main` or `develop` to keep track of it
 - only open it for review once it only contains the changes that are in-scope for the PR
-- make sure to regularly rebase it on the feature branch in the meantime
-  - just because the PR needs to target `main` or `develop` doesn't mean that you can't still do that!
+
+```{tip}
+Just because the _PR_ needs to target `main` or `develop` doesn't mean that you can't still base _your branch_ on another branch!
+
+If you do this, make sure to regularly rebase it on the feature branch in the meantime.
+```
 
 ##### Prioritize code review over chaining branches
 
@@ -195,10 +218,14 @@ If you are used to working with conventional merges, then this workflow may seem
 ##### Cheat sheet
 
 - Instead of `git merge <target-branch>` to get recent changes from the target branch, do `git rebase <target-branch>`
-  - Be aware that because of how `rebase` works, this might give you more than one set of conflicts, one for each commit in your branch, in contrast to `merge`, where you resolve everything at once.
+```{note}
+Be aware that because of how `rebase` works, this might give you more than one set of conflicts, one for each commit in your branch, in contrast to `merge`, where you resolve everything at once.
+```
 - Instead of `git pull` to get new commits others made in a feature branch, do `git pull --rebase`
 - Instead of `git push` to push your changes to a feature branch, do `git push --force-with-lease`
-  - Do **NOT** do `git push --force` **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
+```{danger}
+Do **NOT** do `git push --force` **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
+```
 
 You should understand what a rebase does instead of following this cheat sheet blindly, but rest assured, it's not black magic, and not much actually changes.
 
@@ -400,7 +427,9 @@ Not everyone is equally comfortable using `rebase`. If you aren't:
 
 ### EAFP/Trust-based model
 
-(This doesn't apply to external contributors.)
+```{note}
+This doesn't apply to external contributors.
+```
 
 As we are a team of professionals, we explicitly depart from the traditional open source model in that there is **no strict separation between contributor and maintainer**, or author and reviewer in general. Instead, we treat **code review as a trust-based collaborative process**. While the author of a PR is responsible for getting the changes merged by default, and often will be the sole contributor of concrete code changes in the end, this is for practical reasons rather than because of policy.
 
@@ -416,7 +445,9 @@ As we are a team of professionals, we explicitly depart from the traditional ope
 
 ### Workarounds
 
-(This only partially applies to external contributors.)
+```{note}
+This only partially applies to external contributors.
+```
 
 Unfortunately, Forgejo is somewhat geared to that traditional open source model, and a bit all-or-nothing regarding safeguards. That means that we need some workarounds.
 
@@ -428,7 +459,11 @@ In order to make sure that we have the final say and can do what we need to, we'
 
 This means that even if there are blockers that should prevent a merge, the UI will offer you to do a merge anyway.
 
-**DO NOT DO THIS without a very good reason**. If the merge button is red, and you think that merging is necessary for some reason:
+```{important}
+**DO NOT DO THIS without a very good reason**.
+```
+
+If the merge button is red, and you think that merging is necessary for some reason:
 
 - first, reconsider.
 - then, if you're sure regardless:
@@ -460,9 +495,7 @@ Comments only result in a resolvable item if they are made on the diff of the PR
 
 **So, do that, even if it doesn't relate to a specific change in the diff, you can use a random location** - and note in your comment that it is unrelated to the diff.
 
-#### Examples
-
-Some examples for comments that should be blockers that don't relate to a (specific) current line in the diff:
+```{admonition} Some examples for comments that should be blockers that don't relate to a (specific) current line in the diff
 
 - "We need PR #42069 to be merged before merging this. Before resolving, make sure that this PR is merged and this branch is rebased on current `develop`"
 - "I have doubts about `<X general design decision spanning many specific changes>`, what is your reasoning, and what alternatives did you consider?"
@@ -471,16 +504,19 @@ Some examples for comments that should be blockers that don't relate to a (speci
   - "You forgot to make a migration for your model change"
 - "I am worried about a regression with `<Y feature that is implemented somewhere completely different>`"
 - "This PR is just one huge commit, please do an interactive rebase, split up the commit into multiple smaller ones, and make it reviewable"
+```
 
 #### Resolving comments
 
 The default assumption when a reviewer creates a resolvable thread is that the reviewer will resolve it when the issue it raises has been addressed to their satisfaction.
 
-Deviations from this are made explicit, some examples:
+Deviations from this are made explicit.
 
+```{admonition} Some examples
 - "I think this would be more readable as a list comprehension, but that's a matter of taste, feel free to resolve if you disagree"
 - "I think X change would be a good idea here, but also, that's out of scope for this PR - feel free to resolve after making a followup issue"
 - "This PR needs <other PR> to be merged first, if that's happened, feel free to resolve this"
+```
 
 ##### Notify reviewers when you're done
 
@@ -496,16 +532,20 @@ When merging, **always do a rebase + merge commit via the Forgejo UI**.
 
 Do not merge PRs without review from at least one colleague, unless it's an urgent hotfix.
 
-Merges are done by the reviewer by default, but the reviewer can give conditional consent otherwise. Examples:
+Merges are done by the reviewer by default, but the reviewer can give conditional consent otherwise.
 
+```{admonition} Examples for conditional consent
 - "Apart from the missing migration and the typo in the docs, LGTM. Feel free to merge on pipeline success once that is done."
 - "LGTM, but it's Friday afternoon, let's not merge this now. I'm on vacation next week, but feel free to merge first thing Monday morning!"
+```
 
 ### Using issues
 
 You're encouraged to use issues, especially if you aren't starting to work on a task yet. However, you're also free to make WIP PRs for branches right from the start (or even as placeholders for future development) so that all relevant info can be in one place, especially if you'd like to use the PR to eg. make notes on the diff/run CI/have an overview of your changes.
 
+```{note}
 Bear in mind that at the time of this writing, it's impossible to filter PRs by their WIP status in Forgejo, so avoid cluttering the project with too many of them.
+```
 
 ### WIP PRs
 
@@ -513,7 +553,11 @@ PRs that **aren't ready for review yet should be marked as WIP**. It's encourage
 
 Before being marked as ready for review for the first time, there are **no rules for the content of WIP PRs**. They can contain experimental changes, 100 unsquashed microcommits that lead to a +2/-1 diff, no changes at all, 100 slightly different instances of the same +1728/-1337 change that has been force-pushed with slight alterations until CI passed, all of the above over the course of their lifespan, or whatever else supports the personal workflow of the authoring team member.
 
-Unless a colleague has requested a pre-review of an almost-ready WIP PR, do not complain about what you see when you make the choice to look at it. **We are accountable for what we choose to present, not how we get there**.
+Unless a colleague has requested a pre-review of an almost-ready WIP PR, do not complain about what you see when you make the choice to look at it.
+
+```{note}
+**We are accountable for what we choose to present, not how we get there**.
+```
 
 After being marked as ready for review for the first time, PRs should at least more or less follow standards of reviewability, even when put back into WIP state while changes are being made.
 
@@ -528,7 +572,11 @@ PRs marked as ready should
 
 All commits should pass `pre-commit` checks, unless they are part of a WIP while changes are being made after review.
 
-CI should already have passed, or changes since the last time CI passed should be minimal, and the CI jobs queued or running. (For projects that don't have CI yet, consider that any given statement is true for all members of the empty set, and draw your conclusions.)
+CI should already have passed, or changes since the last time CI passed should be minimal, and the CI jobs queued or running.
+
+```{note}
+For projects that don't have CI yet, consider that any given statement is true for all members of the empty set, and draw your conclusions.)
+```
 
 The PR branch should be rebased on its target at the time the PR is marked as ready.
 
@@ -550,13 +598,14 @@ The PR should not make test coverage worse:
 - trivial changes/refactors don't need new tests
 - hotfixes never need tests, but depending on the nature of the hotfixes, they should be added in a followup PR
 
-#### A caveat
+```{admonition} A caveat
 
 Don't take this subsection too seriously, and use common sense. When in doubt, apply the spirit of the rules, not the letter, and account for context.
 
 Ultimately, the goal here is to make code review less frustrating for everyone involved, not to add barriers.
 
 Remember the goals of code review discussed above, and make sure that your actions are in line with them.
+```
 
 ### Code ownership and etiquette
 
@@ -585,7 +634,11 @@ All of that said, **err on the side of speaking up if you think that a change sh
 
 #### Disagreements
 
-Remember that just because you're in the role of a reviewer, that doesn't make your opinion more valid than the author's. **You are collaborating, not gatekeeping.**
+Remember that just because you're in the role of a reviewer, that doesn't make your opinion more valid than the author's.
+
+```{important}
+**You are collaborating, not gatekeeping.**
+```
 
 You can disagree with the author's chosen solution, but the author can disagree with your proposed alternative just the same.
 
