@@ -505,7 +505,7 @@ You can use issues, if you want, but it's also OK to just make placeholder branc
 
 ### WIP PRs
 
-All PRs that, to the best of the knowledge of their author, **aren't ready to be merged, should be marked as WIP**. However, you should never assume that a colleague didn't simply forget to revert the PR to WIP state.
+PRs that **aren't ready for review yet should be marked as WIP**. It's encouraged to mark PRs as WIP again if something comes up that means that they shouldn't be merged in their current state, however, this isn't required - you can also simply create a blocker/review comment.
 
 Before being marked as ready for review for the first time, there are **no rules for the content of WIP PRs**. They can contain experimental changes, 100 unsquashed microcommits that lead to a +2/-1 diff, no changes at all, 100 slightly different instances of the same +1728/-1337 change that has been force-pushed with slight alterations until CI passed, all of the above over the course of their lifespan, or whatever else supports the personal workflow of the authoring team member.
 
