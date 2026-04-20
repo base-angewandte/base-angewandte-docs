@@ -411,7 +411,6 @@ As we are a team of professionals, we explicitly depart from the traditional ope
   - For example, branch protection exists, but everyone has permission to temporarily disable it.
   - Basic assumption: **if it can be forgotten without noticing that anything is wrong, it will be**.
 - In general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/).
-  - Because when it's humans executing the "code", LBYL is like introducing a network request for every `assert`.
 - For accountability regarding the last point, **deviations from standard procedure must be documented**.
 
 ### Workarounds
