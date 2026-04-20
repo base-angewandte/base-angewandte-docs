@@ -118,6 +118,7 @@ When working on a feature branch:
 
 **Collaborating on the same branch is NOT an exception to this rule**, see [](#collaboration).
 
+```{tip}
 ##### An awesome git tutorial
 
 If you're not comfortable with using rebase yet, consider following [this awesome interactive tutorial](https://learngitbranching.js.org/) to become familiar with the concept! If you're already an experienced git user, the **relevant lessons for `rebase` (and `cherry-pick`)** are:
@@ -138,6 +139,7 @@ If you're not comfortable with using rebase yet, consider following [this awesom
 - Remote: To Origin And Beyond -- Advanced Git Remotes!
   - Level 1: Push Main!
   - Level 2: Merging with remotes _(only for contrast with the rebase approach, and perhaps as a demonstration of why we use the rebase approach)_
+```
 
 #### Rebase continuously
 
