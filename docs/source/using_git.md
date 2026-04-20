@@ -37,7 +37,7 @@ As a quick intro and contextualization:
 - Internally, for code review, we follow a **trust but verify** principle that assumes **good intentions but also human fallibility**.
   Our safeguards are circumventable, but only intentionally and explicitly, and in a way that leaves a paper trail for accountability.
   - For example, branch protection exists, but everyone has the ability to temporarily disable it.
-  - And in general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/). As in, rules aren't strictly enforced by technical means, but if they are broken, that needs to be justified, and there had better be a good reason for it.
+  - And in general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/) where code review is concerned. As in, rules aren't strictly enforced by technical means, but if they are broken, that needs to be justified, and there had better be a good reason for it.
 
 ## Setup
 
@@ -410,7 +410,7 @@ As we are a team of professionals, we explicitly depart from the traditional ope
 - So: We implement safeguards, but these safeguards are soft and intentionally circumventable - **but only by intentional and explicit action**.
   - For example, branch protection exists, but everyone has permission to temporarily disable it.
   - Basic assumption: **if it can be forgotten without noticing that anything is wrong, it will be**.
-- In general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/).
+- In general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/) when it comes to code review.
 - For accountability regarding the last point, **deviations from standard procedure must be documented**.
 
 ### Workarounds
