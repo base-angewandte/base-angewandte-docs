@@ -501,7 +501,7 @@ Merges are done by the reviewer by default, but the reviewer can give conditiona
 
 ### Using issues
 
-You can use issues, if you want, but it's also OK to just make placeholder branches with WIP PRs attached immediately, and keep track of everything there.
+You're encouraged to use issues, especially if you aren't starting to work on a task yet. However, you're also free to make placeholder branches with WIP PRs attached so that all relevant info can be in one place.
 
 ### WIP PRs
 
