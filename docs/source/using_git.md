@@ -165,6 +165,7 @@ External contributors who aren't comfortable with rebase need not do this.
 When collaborating on a branch (or simply pulling in changes made as part of the review process), use the same workflow:
 
 - Instead of `git pull`, use `git pull --rebase`.
+  - You may want to alias this to `git pure`.
 - Instead of `git push` use `git push --force-with-lease`.
   - You may want to alias this to `git please`.
 
