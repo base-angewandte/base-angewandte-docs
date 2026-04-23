@@ -228,13 +228,13 @@ Be aware that because of how `rebase` works, this might give you more than one s
 Do **NOT** do `git push --force` **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
 ```
 
-You should understand what a rebase does instead of following this cheat sheet blindly, but rest assured, it's not black magic, and not much actually changes.
-
-If you don't understand rebase yet, see the [](#use-rebase) subsection above for an interactive tutorial.
-
 ```{tip}
 There are some aliases in [](#setup) that we'd recommend for ergonomics! And of course, you can also define your own.
 ```
+
+You should understand what a rebase does instead of following this cheat sheet blindly, but rest assured, it's not black magic, and not much actually changes.
+
+If you don't understand rebase yet, see the [](#use-rebase) subsection above for an interactive tutorial.
 
 ### Commit Guidelines
 
