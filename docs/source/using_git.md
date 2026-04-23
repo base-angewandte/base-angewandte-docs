@@ -385,7 +385,9 @@ As the review process ties in closely with using Git, it is documented here.
 
 Internally, we use Forgejo, and a trust-based workflow. External contributors should read the [](#external-contributors) subsection.
 
+```{note}
 This section is meant as a rough guideline, not absolute gospel. Take it with a grain of salt, and adjust for context - just be prepared to explain why you did so.
+```
 
 ### Goals of code review
 
