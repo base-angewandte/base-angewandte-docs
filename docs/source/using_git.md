@@ -232,11 +232,9 @@ You should understand what a rebase does instead of following this cheat sheet b
 
 If you don't understand rebase yet, see the [](#use-rebase) subsection above for an interactive tutorial.
 
-##### Aliases over config
-
-The previous version of these docs recommended configuring some git commands to do the right thing by default; however, with the new workflow, this makes less sense, the common behaviors aren't necessarily sane defaults (a `git pull` while on `develop` to pull in new changes should error if you accidentally added a commit there instead of a new branch). In general, rebasing, while safe if done correctly, should be a conscious choice.
-
-However, there are some aliases in [](#setup) that we'd recommend for ergonomics instead! And of course, you can also define your own.
+```{tip}
+There are some aliases in [](#setup) that we'd recommend for ergonomics! And of course, you can also define your own.
+```
 
 ### Commit Guidelines
 
