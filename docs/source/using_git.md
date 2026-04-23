@@ -236,6 +236,41 @@ You should understand what a rebase does instead of following this cheat sheet b
 
 If you don't understand rebase yet, see the [](#use-rebase) subsection above for an interactive tutorial.
 
+#### Hotfixes
+
+For [hotfixes as defined by `git-flow`](https://nvie.com/posts/a-successful-git-branching-model/#hotfix-branches), there are two possibilities:
+- **time-critical hotfixes** (security issues, significant features not working):
+  - Make a hotfix branch based on `main` and create a PR **that you merge immediately without review**
+  - Do NOT merge `main` back into `develop`
+  - Instead, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that
+  - Go through the standard review process for this PR, backporting any resulting changes to `main` in a new hotfix branch
+    - This branch obviously does not require review or a followup, unless it doesn't apply cleanly
+- **other hotfixes**:
+  - Make a hotfix branch based on `main` and create a PR **that gets reviewed normally**
+  - Once this review is done, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that
+  - If the commits apply cleanly to `develop` (rebase is successful, maybe with some trivial merge conflicts, no other changes): merge this PR yourself
+  - Otherwise, go through the standard review process for this PR
+- In both cases:
+  - Link to the hotfix PR in the PR to `develop`
+
+```{note}
+We also use "hotfix" branches for things that aren't critical, but should be deployed ASAP/sooner than the current state of `develop` allows for, like typos, missing tranlations, wrong info, fixes for usability issues, etc
+```
+
+```{note}
+The multiple PRs may seem redundant, but they document what happened and also provide a sanity check via CI (once we have that)
+```
+
+```{tip}
+For rebasing hotfix branches on develop, [`git cherry-pick`](https://git-scm.com/docs/git-cherry-pick) is a simple solution.
+
+Hotfix branches usually shouldn't be too large, but here's an alternative if there are many commits:
+```sh
+git checkout hotfix/<branch-name>
+git checkout -b hotfix/<branch-name>-develop
+git rebase --onto develop main
+```
+
 ### Commit Guidelines
 
 The cardinal rule for creating good commits is to ensure there is only one "logical change" per commit. There are many reasons why this is an important rule:
