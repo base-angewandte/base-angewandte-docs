@@ -191,30 +191,78 @@ If it happened later, I hope you like re-resolving any conflicts and also maybe 
 
 In that case, you will have to temporarily disable branch protection on the target branch to allow manual pushes.
 
-#### Create feature branches based on `main` or `develop`
+#### Only create PRs targeting `main` or `develop`
 
-ie: **Do not create feature branches based on other feature branches**.
+In other words: **never open a PR with a feature branch as a target**.
 
-This rule is less strict than the other ones. Developing a set of related experimental changes in tandem with each other locally can be a great way to realize how these changes will interact in practice, and later factoring these changes into multiple PRs with a smaller scope is actually a very good idea.
+```{note}
+This rule exists to prevent the anti-pattern of huge feature branches, and in particular, to make it clear where each change gets reviewed.
 
-However, **never open a PR with a feature branch as a target**.
+With PRs into feature branches, there are two possible places for reviews to take place:
+- on the PR for the subfeature
+- on the PR for the huge feature branch
 
-Instead, if you want to make a PR targeting a feature branch:
+This means that when the huge feature branch gets reviewed
+- review could take place twice because it isn't recognized that review already took place
+- review could be skipped entirely because it's assumed that it got added to the huge feature branch via a PR
+- making sure to avoid those outcomes diverts time, energy, and focus away from the review
+
+All of this is bad, and huge PRs are a nightmare to review in and of themselves. So, we do not do that here.
+```
+
+##### Chaining branches
+
+Instead, if you feel tempted to make a PR targeting a feature branch:
 
 - open the PR as a WIP targeting `main` or `develop` to keep track of it
-- only open it for review once it only contains the changes that are in-scope for the PR
+  - this PR will contain commits from the branch it is based on, as well - that's OK, it's WIP
+- only open it for review once it **only** contains the changes that are in-scope for the PR/other branch(es) it was based on are now part of the target branch
 
 ```{tip}
 Just because the _PR_ needs to target `main` or `develop` doesn't mean that you can't still base _your branch_ on another branch!
 
-If you do this, make sure to regularly rebase it on the feature branch in the meantime.
+It's highly recommended to regularly rebase it on the feature branch in the meantime.
 ```
 
-##### Prioritize code review over chaining branches
+You can even chain multiple branches like this - see below for some caveats, though!
 
-If this feels restrictive and like it blocks you from getting work done, **put your energy into code review instead**, contributing to an environment where code review happens quickly and is less of a bottleneck.
+```{tip}
+If rebasing a chain of branches becomes annoying, you may want to look into using `git rebase --update-refs`!
+
+Be aware that you still need to push the updated local branches.
+```
+
+##### Prefer code review over chaining branches
+
+Chaining branches like this can be a great tool to
+- stay focused on your current task instead of context switching until your code gets reviewed
+- keep PRs small (more on that below)
+
+But also, managing the branches and keeping them in sync can be a hassle. You're encouraged to **put your energy into code review instead**, contributing to an environment where code review happens quickly and is less of a bottleneck, reducing the need for chaining in the first place.
 
 If you request code review from a colleague and get a request for review from them more than once before they review your code, feel free to call them out on that. (Also, don't be that colleague.)
+
+```{note}
+This goes especially if your changes are mostly unrelated - see below.
+```
+
+##### Prefer chaining branches over putting more in a single PR
+
+PRs should be kept small.
+
+Developing a set of related experimental changes in tandem with each other locally can be a great way to realize how these changes will interact in practice, and later factoring these changes into multiple PRs with a smaller scope is actually a very good idea.
+
+It may be tempting to put a lot of related changes into a single PR because that means "less review". But in practice, splitting up PRs most often means less work required for review in total, as it reduces complexity.
+
+```{note}
+This can require going through a set of potentially convoluted changes, and editing history to isolate aspects that should go in the same PR.
+
+That can be a lot of work, but consider that otherwise, your reviewer will have to go through the same process, but purely in their head, and without the benefit of having written and already understanding the code.
+```
+
+```{note}
+Thinking about how to present your changes is also a great way to self-review!
+```
 
 #### How to implement this workflow
 
