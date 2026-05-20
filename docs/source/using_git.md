@@ -42,7 +42,11 @@ As a quick intro and contextualization:
 - Internally, for code review, we follow a **trust but verify** principle that assumes **good intentions but also human fallibility**.
   Our safeguards are circumventable, but only intentionally and explicitly, and in a way that leaves a paper trail for accountability.
   - For example, branch protection exists, but everyone has the ability to temporarily disable it.
-  - And in general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/) where code review is concerned. As in, rules aren't strictly enforced by technical means, but if they are broken, that needs to be justified, and there had better be a good reason for it.
+  - And in general, we recognize that while rules have a purpose, following them to the letter when they aren't useful for that purpose (or another concern overshadows that purpose) can be detrimental. So, they aren't strictly enforced by technical means, but if they are broken, that needs to be justified, and there had better be a good reason for it.
+
+```{note}
+You can think of the last point as [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/) applied to code review.
+```
 
 ## Setup
 
@@ -461,7 +465,7 @@ Not everyone is equally comfortable using `rebase`. If you aren't:
   - if it isn't that simple, ask us for help!
 - If you're done and the only thing left to do is to rebase before merging, let us know and we'll do that for you!
 
-### EAFP/Trust-based model
+### Trust-based model
 
 ```{note}
 This doesn't apply to external contributors.
@@ -476,8 +480,15 @@ As we are a team of professionals, we explicitly depart from the traditional ope
 - So: We implement safeguards, but these safeguards are soft and intentionally circumventable - **but only by intentional and explicit action**.
   - For example, branch protection exists, but everyone has permission to temporarily disable it.
   - Basic assumption: **if it can be forgotten without noticing that anything is wrong, it will be**.
-- In general, we apply [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/) when it comes to code review.
-- For accountability regarding the last point, **deviations from standard procedure must be documented**.
+- In general, when it comes to code review, we recognize that while rules have a purpose, **they are only useful if they actually serve that purpose, and it can be in the interest of common sense to break them**, based on professional opinion and taking context into account. Furthermore, doing so **unilaterally** may result in disagreements, but resolving those if they arise can be significantly **less overhead** than invoking a feedback loop every time.
+  - For accountability regarding this point, and to prevent [normalization of deviance](https://en.wikipedia.org/wiki/Normalization_of_deviance), **deviations from standard procedure must be documented in writing where they will get noticed**.
+  - Also, anyone doing so must be prepared to justify their decision to other team members if asked.
+  - This documentation must be in plain view of any team member viewing records of the actions taken (for example, in the same PR).
+  - As an example, if a team member makes a review requesting changes, and that review gets dismissed, the "Reason" field should be used to explain in detail why the review was dismissed.
+
+```{note}
+You can think of the last point as [**EAFP over LBYL**](https://realpython.com/python-lbyl-vs-eafp/) applied to code review.
+```
 
 ### Workarounds
 
