@@ -277,7 +277,7 @@ Be aware that because of how `rebase` works, this might give you more than one s
 - Instead of `git pull` to get new commits others made in a feature branch, do `git pull --rebase`
 - Instead of `git push` to push your changes to a feature branch, do `git push --force-with-lease`
 ```{danger}
-Do **NOT** do `git push --force` **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
+Do **NOT** use `git push --force`, **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
 ```
 
 ```{tip}
@@ -489,7 +489,7 @@ There are multiple goals of code review:
   - And ultimately, **this is the primary goal!**
   - The **other goals** serve to implement **prerequisites** for that to happen, or provide some **additional benefit at little extra cost**
     - For example, if quality standards aren't met, the code shouldn't be merged, making QA a prerequisite goal
-  - **Where pursuing another goal doesn't do that, if only for a future review, it is detrimental to the review process**
+  - **Where pursuing another goal doesn't do that, if only for a future review, it is detrimental to the review process!**
 
 ### External contributors
 
@@ -646,7 +646,7 @@ Bear in mind that at the time of this writing, it's impossible to filter PRs by 
 
 PRs that **aren't ready for review yet should be marked as WIP**. It's encouraged to mark PRs as WIP again if something comes up that means that they shouldn't be merged in their current state, however, this isn't required - you can also simply create a blocker/review comment. Just ensure somehow that your colleagues won't accidentally merge the PR.
 
-Before being marked as ready for review for the first time, there are **no rules for the content of WIP PRs**. They can contain experimental changes, 100 unsquashed microcommits that lead to a +2/-1 diff, no changes at all, 100 slightly different instances of the same +1728/-1337 change that has been force-pushed with slight alterations until CI passed, all of the above over the course of their lifespan, or whatever else supports the personal workflow of the authoring team member.
+Before being marked as ready for review for the first time, there are **no rules for the content of WIP PRs**. They can contain experimental changes, 100 unsquashed microcommits that lead to a +2/-1 diff, no changes at all, 100 slightly different instances of the same +1728/-1337 change that has been force-pushed with slight alterations until CI passed, all of the above over the course of their lifespan, or whatever else supports the [personal workflow](https://xkcd.com/1172/) of the authoring team member.
 
 Unless a colleague has requested a pre-review of an almost-ready WIP PR, do not complain about what you see when you make the choice to look at it.
 
@@ -654,7 +654,7 @@ Unless a colleague has requested a pre-review of an almost-ready WIP PR, do not 
 **We are accountable for what we choose to present, not how we get there**.
 ```
 
-After being marked as ready for review for the first time, PRs should at least more or less follow standards of reviewability, even when put back into WIP state while changes are being made.
+After being marked as ready for review for the first time, PRs should at least more or less follow standards of reviewability, even if put back into WIP state while changes are being made.
 
 Respect the fact that your fellow team members might now have a starting point/mental model to look at future changes to the PR from, and don't completely alter the history (although squashing changes into the commits they should have been a part of initially is still a really good idea).
 
