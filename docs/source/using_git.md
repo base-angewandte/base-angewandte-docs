@@ -656,7 +656,7 @@ Unless a colleague has requested a pre-review of an almost-ready WIP PR, do not 
 
 After being marked as ready for review for the first time, PRs should at least more or less follow standards of reviewability, even if put back into WIP state while changes are being made.
 
-Respect the fact that your fellow team members might now have a starting point/mental model to look at future changes to the PR from, and don't completely alter the history (although squashing changes into the commits they should have been a part of initially is still a really good idea).
+Respect the fact that your fellow team members might now have a starting point/mental model to look at future changes to the PR from, and don't completely alter the history unilaterally (although squashing changes into the commits they should have been a part of initially is still a really good idea).
 
 ### Standards of reviewability
 
