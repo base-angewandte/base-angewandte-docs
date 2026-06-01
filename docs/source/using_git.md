@@ -33,9 +33,7 @@ As a quick intro and contextualization:
   - This means that we implement a **workflow based on `git rebase`**, and don't
     care about rewriting history for changes that are still in development.
   - **`main` and `develop`** are of course treated as **immutable history**.
-- Our test coverage is (depending on the project) far from complete at best,
-  nonexistent at worst. We are working on CI infrastructure, but as of 2026-02,
-  it is in its infancy.
+- Our test coverage is (depending on the project) far from complete at best, nonexistent at worst. Also, while we are working on CI infrastructure, as of 2026-06, it doesn't exist yet for every project.
   - This means that **we rely on `pre-commit` for QA**. It's not just a tool to
     avoid having to make changes due to CI failing, it **IS** currently our **only automated
     line of defense** against common and easily preventable errors. While that is still the case, **using it is essential**.
