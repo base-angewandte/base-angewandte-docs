@@ -550,25 +550,48 @@ Unfortunately, Forgejo is somewhat geared to that traditional open source model,
 
 In order to make sure that we have the final say and can do what we need to, we're all repository admins for our projects.
 
-#### Admins can bypass branch protection
-
-This means that even if there are blockers that should prevent a merge, the UI will offer you to do a merge anyway.
+Our branch protection rules apply to admins, too. But, of course, admins can deactivate this check, or branch protection in general.
 
 ```{important}
 **DO NOT DO THIS without a very good reason**.
 ```
 
-If the merge button is red, and you think that merging is necessary for some reason:
+If the merge is blocked, and you think that merging is necessary for some reason:
 
 - first, reconsider.
 - then, if you're sure regardless:
   - unless it's extremely time-critical (like a critical security hotfix): put a brief message in the team chat, giving everyone who is present at least 15 minutes to raise concerns.
-  - for every blocker Forgejo shows:
-    - document in a comment why you are ignoring that blocker and merging anyway.
-    - remove the blocker if possible (eg. by disregarding reviews) in case Forgejo isn't showing all of them at once.
+  - **explicitly (see below) dismiss all blockers that can be dismissed without turning off branch protection for admins. _DO NOT TURN OFF BRANCH PROTECTION BEFORE THIS IS DONE._**
   - do a manual check for any unresolved comment threads, and resolve them with a comment stating why.
   - double-check the team chat for replies to your message
-  - unless there are objections, perform the rebase
+  - unless there are objections, perform the rebase/merge
+  - if you temporarily turned off branch protection, **_DO NOT FORGET TO SWITCH IT ON AGAIN!_**
+  - inform the rest of the team, and link to the PR.
+    - if you temporarily disabled branch protection, **explicitly inform the team of that, and include an explicit reminder that CI may currently be broken as a result (see below).**
+
+It should be noted that there should hardly ever be any cause to turn off branch protection. The following blockers can be explicitly dismissed:
+- Reviews requesting changes can be rejected (**_document the reason why as you reject it_**!)
+- Pending review requests can be deleted, which will generate a message in the PR feed. If there was previously a reason for this specific person to review the PR, **make a comment explaining why that isn't considered necessary anymore**.
+
+The following blockers can't be dismissed:
+- Merge conflicts, for obvious reasons.
+- Failing required CI checks.
+
+```{note}
+This means (at least in theory) that failing CI checks are the only possible reason you might want to temporarily turn off branch protection.
+```
+
+```{important}
+While it may be tempting to do so, merging despite CI being broken would almost certainly also break CI for anyone basing their work on this branch.
+
+**This should therefore only be done in absolute emergencies, no matter how annoying it is to be blocked by that.** Do **NOT** disrespect your colleagues by inflicting on everyone else what you don't want to deal with yourself.
+
+Far from just being annoyed, your colleagues might assume (as they should!) that any CI failures they may be seeing come from the changes they made. **Do not create an environment where people waste time double-checking if `develop` passes CI because someone might have broken it again.**
+```
+
+```{note}
+This is also why it's important to explicitly inform the team if CI may be broken - to prevent erosion of trust due to a mismatch of expectations if someone doesn't make the connection, which can be easy in the heat of the moment.
+```
 
 #### Treat unresolved comment threads as blockers
 
