@@ -103,7 +103,7 @@ For the rest of this document, unless explicitly specified otherwise, the term "
 
 When working on a feature branch:
 
-- **do not merge the target branch back into your branch**.
+- **Do not merge the target branch back into your branch**.
 - Instead, **rebase on the target branch**.
   The **only exception** to this rule is if you are working on a feature branch where such a merge happened **before the rule got introduced**, and you would have to replay a merge commit while rebasing.
 
@@ -181,8 +181,8 @@ In other words: **never open a PR with a feature branch as a target**.
 This rule exists to prevent the anti-pattern of huge feature branches, and in particular, to make it clear where each change gets reviewed.
 
 With PRs into feature branches, there are two possible places for reviews to take place:
-- on the PR for the subfeature
-- on the PR for the huge feature branch
+- On the PR for the subfeature
+- On the PR for the huge feature branch
 
 This means that when the huge feature branch gets reviewed
 - review could take place twice because it isn't recognized that review already took place
@@ -196,9 +196,9 @@ All of this is bad, and huge PRs are a nightmare to review in and of themselves.
 
 Instead, if you feel tempted to make a PR targeting a feature branch:
 
-- open the PR as a WIP targeting `main` or `develop` to keep track of it
-  - this PR will contain commits from the branch it is based on, as well - that's OK, it's WIP
-- only open it for review once it **only** contains the changes that are in-scope for the PR/other branch(es) it was based on are now part of the target branch
+- Open the PR as a WIP targeting `main` or `develop` to keep track of it
+  - This PR will contain commits from the branch it is based on, as well - that's OK, it's WIP
+- Only open it for review once it **only** contains the changes that are in-scope for the PR/other branch(es) it was based on are now part of the target branch
 
 ```{tip}
 Just because the _PR_ needs to target `main` or `develop` doesn't mean that you can't still base _your branch_ on another branch!
@@ -273,13 +273,13 @@ If you don't understand rebase yet, see the [](#use-rebase) subsection above for
 #### Hotfixes
 
 For [hotfixes as defined by `git-flow`](https://nvie.com/posts/a-successful-git-branching-model/#hotfix-branches), there are two possibilities:
-- **time-critical hotfixes** (security issues, significant features not working):
+- **Time-critical hotfixes** (security issues, significant features not working):
   - Make a hotfix branch based on `main` and create a PR **that you merge immediately without review**
   - Do NOT merge `main` back into `develop`
   - Instead, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that
   - Go through the standard review process for this PR, backporting any resulting changes to `main` in a new hotfix branch
     - This branch obviously does not require review or a followup, unless it doesn't apply cleanly
-- **other hotfixes**:
+- **Other hotfixes**:
   - Make a hotfix branch based on `main` and create a PR **that gets reviewed normally**
   - Once this review is done, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that
   - If the commits apply cleanly to `develop` (rebase is successful, maybe with some trivial merge conflicts, no other changes): merge this PR yourself
@@ -488,11 +488,11 @@ Not everyone is equally comfortable using `rebase`. If you aren't:
 - Whatever you do, **DO NOT merge the target branch back into your own branch**
   - PRs with such merge commits won't be accepted
 - If you need to replicate the effect of doing so, there's no way around performing a simple rebase. However:
-  - it should be as simple as (while on your branch)
+  - It should be as simple as (while on your branch)
     - `git fetch origin develop:develop` (or `git fetch origin main:main`)
     - `git rebase develop` (or `git rebase main`)
     - `git push --force-with-lease`
-  - if it isn't that simple, ask us for help!
+  - If it isn't that simple, ask us for help!
 - If you're done and the only thing left to do is to rebase before merging, let us know and we'll do that for you!
 
 ### Trust-based model
@@ -540,16 +540,16 @@ Our branch protection rules apply to admins, too. But, of course, admins can dea
 
 If the merge is blocked, and you think that merging is necessary for some reason:
 
-- first, reconsider.
-- then, if you're sure regardless:
-  - unless it's extremely time-critical (like a critical security hotfix): put a brief message in the team chat, giving everyone who is present at least 15 minutes to raise concerns.
-  - **explicitly (see below) dismiss all blockers that can be dismissed without turning off branch protection for admins. _DO NOT TURN OFF BRANCH PROTECTION BEFORE THIS IS DONE._**
-  - do a manual check for any unresolved comment threads, and resolve them with a comment stating why.
-  - double-check the team chat for replies to your message
-  - unless there are objections, perform the rebase/merge
-  - if you temporarily turned off branch protection, **_DO NOT FORGET TO SWITCH IT ON AGAIN!_**
-  - inform the rest of the team, and link to the PR.
-    - if you temporarily disabled branch protection, **explicitly inform the team of that, and include an explicit reminder that CI may currently be broken as a result (see below).**
+- First, reconsider.
+- Then, if you're sure regardless:
+  - Unless it's extremely time-critical (like a critical security hotfix): put a brief message in the team chat, giving everyone who is present at least 15 minutes to raise concerns.
+  - **Explicitly (see below) dismiss all blockers that can be dismissed without turning off branch protection for admins. _DO NOT TURN OFF BRANCH PROTECTION BEFORE THIS IS DONE._**
+  - Do a manual check for any unresolved comment threads, and resolve them with a comment stating why.
+  - Double-check the team chat for replies to your message
+  - Unless there are objections, perform the rebase/merge
+  - If you temporarily turned off branch protection, **_DO NOT FORGET TO SWITCH IT ON AGAIN!_**
+  - Inform the rest of the team, and link to the PR.
+    - If you temporarily disabled branch protection, **explicitly inform the team of that, and include an explicit reminder that CI may currently be broken as a result (see below).**
 
 It should be noted that there should hardly ever be any cause to turn off branch protection. The following blockers can be explicitly dismissed:
 - Reviews requesting changes can be rejected (**_document the reason why as you reject it_**!)
@@ -692,11 +692,11 @@ The scope of the changes should be minimal. If the PR is decomposable into two P
 
 The PR should not make test coverage worse:
 
-- if new behavior is implemented, it should be covered by tests
-- if existing behavior is changed significantly, and it wasn't covered by tests before, tests should be added
-- for complex refactors, tests should be added before the refactor happens, and pass on both the old and new version of the code
-- trivial changes/refactors don't need new tests
-- hotfixes never need tests, but depending on the nature of the hotfixes, they should be added in a followup PR
+- If new behavior is implemented, it should be covered by tests
+- If existing behavior is changed significantly, and it wasn't covered by tests before, tests should be added
+- For complex refactors, tests should be added before the refactor happens, and pass on both the old and new version of the code
+- Trivial changes/refactors don't need new tests
+- Hotfixes never need tests, but depending on the nature of the hotfixes, they should be added in a followup PR
 
 ```{admonition} A caveat
 
