@@ -187,7 +187,8 @@ With PRs into feature branches, there are two possible places for reviews to tak
 This means that when the huge feature branch gets reviewed
 - review could take place twice because it isn't recognized that review already took place
 - review could be skipped entirely because it's assumed that it got added to the huge feature branch via a PR
-- making sure to avoid those outcomes diverts time, energy, and focus away from the review
+
+Making sure to avoid those outcomes diverts time, energy, and focus away from the review.
 
 All of this is bad, and huge PRs are a nightmare to review in and of themselves. So, we do not do that here.
 ```
