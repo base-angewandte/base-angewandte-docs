@@ -199,7 +199,7 @@ Instead, if you feel tempted to make a PR targeting a feature branch:
 
 - Open the PR as a WIP targeting `main` or `develop` to keep track of it.
   - This PR will contain commits from the branch it is based on, as well - that's OK, it's WIP.
-- Only open it for review once it **only** contains the changes that are in-scope for the PR/other branch(es) it was based on are now part of the target branch.
+- Only open it for review once it **only** contains the changes that are in-scope for the PR, ie, once other branch(es) it was based on are part of the target branch.
 
 ```{tip}
 Just because the _PR_ needs to target `main` or `develop` doesn't mean that you can't still base _your branch_ on another branch!
