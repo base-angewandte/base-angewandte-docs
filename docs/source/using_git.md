@@ -1,44 +1,28 @@
 # Using Git and Forgejo
 
-There is a lot of information about how we use Git and Forgejo, so it all lives
-in one place here in order to be easy to find, and avoid bloating the relevant
-parts of the other sections.
+There is a lot of information about how we use Git and Forgejo, so it all lives in one place here in order to be easy to find, and avoid bloating the relevant parts of the other sections.
 
 ```{tip}
-The other sections refer to this document, so you may want to read them first
-and return here with more context.
+The other sections refer to this document, so you may want to read them first and return here with more context.
 ```
 
 ```{important}
-Just be aware that you should definitely do so and **become familiar with our
-workflow before contributing**, especially as it's tailored to our specific
-requirements, and therefore likely not what you expect.
+Just be aware that you should definitely do so and **become familiar with our workflow before contributing**, especially as it's tailored to our specific requirements, and therefore likely not what you expect.
 ```
 
 ## Philosophy and informal tl;dr
 
 As a quick intro and contextualization:
 
-- We have development instances that reflect the latest state of development,
-  which we also use for user acceptance testing. Production instances run code
-  that has been deemed ready for production deployment.
-  - This means that despite usually being overkill for developing rolling
-    release web applications, **we implement `git-flow`** as there are concrete
-    benefits for us.
-  - It also means that while it's somewhat less critical that `develop` be in a
-    perfect state than `main`, it **should be treated as a production branch**
-    just the same.
-- We see `git` as a tool to create a curated and easy to understand history of
-  changes, not as a tool to document the development process.
-  - This means that we implement a **workflow based on `git rebase`**, and don't
-    care about rewriting history for changes that are still in development.
+- We have development instances that reflect the latest state of development, which we also use for user acceptance testing. Production instances run code that has been deemed ready for production deployment.
+  - This means that despite usually being overkill for developing rolling release web applications, **we implement `git-flow`** as there are concrete benefits for us.
+  - It also means that while it's somewhat less critical that `develop` be in a perfect state than `main`, it **should be treated as a production branch** just the same.
+- We see `git` as a tool to create a curated and easy to understand history of changes, not as a tool to document the development process.
+  - This means that we implement a **workflow based on `git rebase`**, and don't care about rewriting history for changes that are still in development.
   - **`main` and `develop`** are of course treated as **immutable history**.
 - Our test coverage is (depending on the project) far from complete at best, nonexistent at worst. Also, while we are working on CI infrastructure, as of 2026-06, it doesn't exist yet for every project.
-  - This means that **we rely on `pre-commit` for QA**. It's not just a tool to
-    avoid having to make changes due to CI failing, it **IS** currently our **only automated
-    line of defense** against common and easily preventable errors. While that is still the case, **using it is essential**.
-- Internally, for code review, we follow a **trust but verify** principle that assumes **good intentions but also human fallibility**.
-  Our safeguards are circumventable, but only intentionally and explicitly, and in a way that leaves a paper trail for accountability.
+  - This means that **we rely on `pre-commit` for QA**. It's not just a tool to avoid having to make changes due to CI failing, it **IS** currently our **only automated line of defense** against common and easily preventable errors. While that is still the case, **using it is essential**.
+- Internally, for code review, we follow a **trust but verify** principle that assumes **good intentions but also human fallibility**. Our safeguards are circumventable, but only intentionally and explicitly, and in a way that leaves a paper trail for accountability.
   - For example, branch protection exists, but everyone has the ability to temporarily disable it.
   - And in general, we recognize that while rules have a purpose, following them to the letter when they aren't useful for that purpose (or another concern overshadows that purpose) can be detrimental. So, they aren't strictly enforced by technical means, but if they are broken, that needs to be justified, and there had better be a good reason for it.
 
