@@ -36,7 +36,7 @@ Before committing, make sure to check/update your git configuration:
 
 - You should at least update your **user name** and **email** to what you would like to show up in the published commits.
 - Our default branch is `main`, which might not be the case with older git versions.
-  - But **you probably want to check out `develop`**, as that represents the newest state of development; `main` is for releases
+  - But **you probably want to check out `develop`**, as that represents the newest state of development; `main` is for releases.
 - We follow the **`git-flow` branching model**. Check [](#development) for more details.
   - For `feature`/`fix`/`hotfix` branches, we use `rebase`; **do NOT merge the target branch (or any other branch) back into the branch you are working on!** Instead, use `git rebase target-branch`. Again, see [](#development) for more details.
   - **Always use the Forgejo/GitHub UI for merging these branches!**
@@ -181,12 +181,12 @@ In other words: **never open a PR with a feature branch as a target**.
 This rule exists to prevent the anti-pattern of huge feature branches, and in particular, to make it clear where each change gets reviewed.
 
 With PRs into feature branches, there are two possible places for reviews to take place:
-- On the PR for the subfeature
-- On the PR for the huge feature branch
+- On the PR for the subfeature.
+- On the PR for the huge feature branch.
 
 This means that when the huge feature branch gets reviewed
-- review could take place twice because it isn't recognized that review already took place
-- review could be skipped entirely because it's assumed that it got added to the huge feature branch via a PR
+- review could take place twice because it isn't recognized that review already took place.
+- review could be skipped entirely because it's assumed that it got added to the huge feature branch via a PR.
 
 Making sure to avoid those outcomes diverts time, energy, and focus away from the review.
 
@@ -197,9 +197,9 @@ All of this is bad, and huge PRs are a nightmare to review in and of themselves.
 
 Instead, if you feel tempted to make a PR targeting a feature branch:
 
-- Open the PR as a WIP targeting `main` or `develop` to keep track of it
-  - This PR will contain commits from the branch it is based on, as well - that's OK, it's WIP
-- Only open it for review once it **only** contains the changes that are in-scope for the PR/other branch(es) it was based on are now part of the target branch
+- Open the PR as a WIP targeting `main` or `develop` to keep track of it.
+  - This PR will contain commits from the branch it is based on, as well - that's OK, it's WIP.
+- Only open it for review once it **only** contains the changes that are in-scope for the PR/other branch(es) it was based on are now part of the target branch.
 
 ```{tip}
 Just because the _PR_ needs to target `main` or `develop` doesn't mean that you can't still base _your branch_ on another branch!
@@ -218,8 +218,8 @@ Be aware that you still need to push the updated local branches.
 ##### Prefer code review over chaining branches
 
 Chaining branches like this can be a great tool to
-- stay focused on your current task instead of context switching until your code gets reviewed
-- keep PRs small (more on that below)
+- stay focused on your current task instead of context switching until your code gets reviewed.
+- keep PRs small (more on that below).
 
 But also, managing the branches and keeping them in sync can be a hassle. You're encouraged to **put your energy into code review instead**, contributing to an environment where code review happens quickly and is less of a bottleneck, reducing the need for chaining in the first place.
 
@@ -253,12 +253,12 @@ If you are used to working with conventional merges, then this workflow may seem
 
 ##### Cheat sheet
 
-- Instead of `git merge <target-branch>` to get recent changes from the target branch, do `git rebase <target-branch>`
+- Instead of `git merge <target-branch>` to get recent changes from the target branch, do `git rebase <target-branch>`.
 ```{note}
 Be aware that because of how `rebase` works, this might give you more than one set of conflicts, one for each commit in your branch, in contrast to `merge`, where you resolve everything at once.
 ```
-- Instead of `git pull` to get new commits others made in a feature branch, do `git pull --rebase`
-- Instead of `git push` to push your changes to a feature branch, do `git push --force-with-lease`
+- Instead of `git pull` to get new commits others made in a feature branch, do `git pull --rebase`.
+- Instead of `git push` to push your changes to a feature branch, do `git push --force-with-lease`.
 ```{danger}
 Do **NOT** use `git push --force`, **EVER**! If `git push --force-with-lease` didn't work, that would overwrite someone else's work in 99% of cases.
 ```
@@ -275,25 +275,25 @@ If you don't understand rebase yet, see the [](#use-rebase) subsection above for
 
 For [hotfixes as defined by `git-flow`](https://nvie.com/posts/a-successful-git-branching-model/#hotfix-branches), there are two possibilities:
 - **Time-critical hotfixes** (security issues, significant features not working):
-  - Make a hotfix branch based on `main` and create a PR **that you merge immediately without review**
-  - Do NOT merge `main` back into `develop`
-  - Instead, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that
-  - Go through the standard review process for this PR, backporting any resulting changes to `main` in a new hotfix branch
-    - This branch obviously does not require review or a followup, unless it doesn't apply cleanly
+  - Make a hotfix branch based on `main` and create a PR **that you merge immediately without review**.
+  - Do NOT merge `main` back into `develop`.
+  - Instead, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that.
+  - Go through the standard review process for this PR, backporting any resulting changes to `main` in a new hotfix branch.
+    - This branch obviously does not require review or a followup, unless it doesn't apply cleanly.
 - **Other hotfixes**:
-  - Make a hotfix branch based on `main` and create a PR **that gets reviewed normally**
-  - Once this review is done, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that
-  - If the commits apply cleanly to `develop` (rebase is successful, maybe with some trivial merge conflicts, no other changes): merge this PR yourself
-  - Otherwise, go through the standard review process for this PR
+  - Make a hotfix branch based on `main` and create a PR **that gets reviewed normally**.
+  - Once this review is done, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that.
+  - If the commits apply cleanly to `develop` (rebase is successful, maybe with some trivial merge conflicts, no other changes): merge this PR yourself.
+  - Otherwise, go through the standard review process for this PR.
 - In both cases:
-  - Link to the hotfix PR in the PR to `develop`
+  - Link to the hotfix PR in the PR to `develop`.
 
 ```{note}
-We also use "hotfix" branches for things that aren't critical, but should be deployed ASAP/sooner than the current state of `develop` allows for, like typos, missing tranlations, wrong info, fixes for usability issues, etc
+We also use "hotfix" branches for things that aren't critical, but should be deployed ASAP/sooner than the current state of `develop` allows for, like typos, missing tranlations, wrong info, fixes for usability issues, etc.
 ```
 
 ```{note}
-The multiple PRs may seem redundant, but they document what happened and also provide a sanity check via CI (once we have that)
+The multiple PRs may seem redundant, but they document what happened and also provide a sanity check via CI (once we have that).
 ```
 
 ```{tip}
@@ -464,14 +464,14 @@ This section is meant as a rough guideline, not absolute gospel. Take it with a 
 There are multiple goals of code review:
 
 - **Quality assurance:** providing a second, unbiased look at the proposed changes to
-  - spot more issues before they can pop up in production
-  - uphold code quality standards
-- **Horizontal transfer of knowledge/skills** within the team
-- **Documenting the development process** - PRs are an excellent source of information for future developers wanting to understand **not just which changes** were made, but **what considerations** led to that specific solution
+  - spot more issues before they can pop up in production.
+  - uphold code quality standards.
+- **Horizontal transfer of knowledge/skills** within the team.
+- **Documenting the development process** - PRs are an excellent source of information for future developers wanting to understand **not just which changes** were made, but **what considerations** led to that specific solution.
 - **BUT ALSO:** Getting the code merged!
   - And ultimately, **this is the primary goal!**
-  - The **other goals** serve to implement **prerequisites** for that to happen, or provide some **additional benefit at little extra cost**
-    - For example, if quality standards aren't met, the code shouldn't be merged, making QA a prerequisite goal
+  - The **other goals** serve to implement **prerequisites** for that to happen, or provide some **additional benefit at little extra cost**.
+    - For example, if quality standards aren't met, the code shouldn't be merged, making QA a prerequisite goal.
   - **Where pursuing another goal doesn't do that, if only for a future review, it is detrimental to the review process!**
 
 ### External contributors
@@ -486,10 +486,10 @@ Not everyone is equally comfortable using `rebase`. If you aren't:
 
 - Consider doing [this interactive git tutorial](https://learngitbranching.js.org/) to familiarize yourself with how it works
   - The [](#use-rebase) section above has a list of levels relevant to `rebase`!
-- Whatever you do, **DO NOT merge the target branch back into your own branch**
-  - PRs with such merge commits won't be accepted
+- Whatever you do, **DO NOT merge the target branch back into your own branch**.
+  - PRs with such merge commits won't be accepted.
 - If you need to replicate the effect of doing so, there's no way around performing a simple rebase. However:
-  - It should be as simple as (while on your branch)
+  - It should be as simple as (while on your branch):
     - `git fetch origin develop:develop` (or `git fetch origin main:main`)
     - `git rebase develop` (or `git rebase main`)
     - `git push --force-with-lease`
@@ -546,8 +546,8 @@ If the merge is blocked, and you think that merging is necessary for some reason
   - Unless it's extremely time-critical (like a critical security hotfix): put a brief message in the team chat, giving everyone who is present at least 15 minutes to raise concerns.
   - **Explicitly (see below) dismiss all blockers that can be dismissed without turning off branch protection for admins. _DO NOT TURN OFF BRANCH PROTECTION BEFORE THIS IS DONE._**
   - Do a manual check for any unresolved comment threads, and resolve them with a comment stating why.
-  - Double-check the team chat for replies to your message
-  - Unless there are objections, perform the rebase/merge
+  - Double-check the team chat for replies to your message.
+  - Unless there are objections, perform the rebase/merge.
   - If you temporarily turned off branch protection, **_DO NOT FORGET TO SWITCH IT ON AGAIN!_**
   - Inform the rest of the team, and link to the PR.
     - If you temporarily disabled branch protection, **explicitly inform the team of that, and include an explicit reminder that CI may currently be broken as a result (see below).**
@@ -598,13 +598,13 @@ Comments only result in a resolvable item if they are made on the diff of the PR
 
 ```{admonition} Some examples for comments that should be blockers that don't relate to a (specific) current line in the diff
 
-- "We need PR #42069 to be merged before merging this. Before resolving, make sure that this PR is merged and this branch is rebased on current `develop`"
+- "We need PR #42069 to be merged before merging this. Before resolving, make sure that this PR is merged and this branch is rebased on current `develop`."
 - "I have doubts about `<X general design decision spanning many specific changes>`, what is your reasoning, and what alternatives did you consider?"
 - Any comments about the absence of important changes, like:
-  - "This PR needs tests"
-  - "You forgot to make a migration for your model change"
-- "I am worried about a regression with `<Y feature that is implemented somewhere completely different>`"
-- "This PR is just one huge commit, please do an interactive rebase, split up the commit into multiple smaller ones, and make it reviewable"
+  - "This PR needs tests."
+  - "You forgot to make a migration for your model change."
+- "I am worried about a regression with `<Y feature that is implemented somewhere completely different>`."
+- "This PR is just one huge commit, please do an interactive rebase, split up the commit into multiple smaller ones, and make it reviewable."
 ```
 
 #### Resolving comments
@@ -614,9 +614,9 @@ The default assumption when a reviewer creates a resolvable thread is that the r
 Deviations from this are made explicit.
 
 ```{admonition} Some examples
-- "I think this would be more readable as a list comprehension, but that's a matter of taste, feel free to resolve if you disagree"
-- "I think X change would be a good idea here, but also, that's out of scope for this PR - feel free to resolve after making a followup issue"
-- "This PR needs <other PR> to be merged first, if that's happened, feel free to resolve this"
+- "I think this would be more readable as a list comprehension, but that's a matter of taste, feel free to resolve if you disagree."
+- "I think X change would be a good idea here, but also, that's out of scope for this PR - feel free to resolve after making a followup issue."
+- "This PR needs <other PR> to be merged first, if that's happened, feel free to resolve this."
 ```
 
 ##### Notify reviewers when you're done
