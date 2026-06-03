@@ -12,7 +12,7 @@ Here are the steps to install everything you will need to work with the _base_ c
 
 1. Install some basic packages needed in our setup:
    - ```
-     sudo apt install curl git git-flow build-essential libssl-dev \
+     sudo apt install curl git build-essential libssl-dev \
        libffi-dev zlib1g-dev libsqlite3-dev liblzma-dev libbz2-dev \
        libncurses5-dev libreadline-dev tk8.6-dev
      ```
@@ -49,67 +49,7 @@ Here are the steps to install everything you will need to work with the _base_ c
      to the group `docker`, e.g. with `sudo usermod -a -G docker myusername`. Start a new
      terminal session afterward, so that the group info is updated in the environment.
 5. Set up git
-   - Before committing, make sure to check/update your git configuration:
-     - You should at least update your **user name** and **email** to what you would like to show up in the published commits.
-     - Our **default branch is `main`**, which might not be the case with older git versions.
-     - We follow the **`git-flow` branching model**. Check the [Git section of the Development Guide](./dev_guide.md#git) for more details and a recommended git extension.
-     - **Merge commits** are **mandatory** when finishing a branch, **even if a fast-forward merge is possible, and even if there is only one commit in the branch**, so you might want to change the default behavior of `git merge` and the `git-flow` extension (if installed) to always make a merge commit.
-
-     Here is how to check and update the corresponding settings:
-     ```bash
-     # check your git config
-     git config --global user.name
-     git config --global user.email
-     git config --global init.defaultBranch
-     git config --global merge.ff
-     git config --global pull.ff
-     # update the settings (careful: applies to all repos!)
-     git config --global user.name "Ms. Robot"
-     git config --global user.email "ro@example.org"
-     git config --global init.defaultBranch "main"
-     git config --global merge.ff "false"
-     git config --global pull.ff "true"
-     # set settings for the git-flow extension (careful: applies to all repos!)
-     git config --global gitflow.feature.finish.no-ff "true"
-     git config --global gitflow.bugfix.finish.no-ff "true"
-     ```
-     ```{warning}
-     Be aware that this will change your git config for all repositories - if you're a one-time contributor, you may want to run these commands only in the repository you want to contribute to, and leave out the `--global` flag.
-     ```
-     ```{note}
-     Setting `pull.ff` isn't necessary, but restores the default behavior of `git pull` -- when setting `merge.ff` to `false`, just pulling new changes from a remote would create a merge commit, which is probably not what you want.
-
-     You may wish to not touch the settings for the internal `git` commands at all, and simply always use `git-flow` for dealing with your branches.
-     ```
-     Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
-     `editor ~/.gitconfig`). Here is a template including some handy shortcuts for git:
-     ```ini
-     [user]
-         email = ro@example.org
-         name = Ms. Robot
-     [alias]
-         co = checkout
-         ci = commit
-         st = status
-         br = branch
-         hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-         type = cat-file -t
-         dump = cat-file -p
-     [core]
-         # leave this one out, if you want to keep the standard (nano), or change
-         # to your preferred editor
-         editor = vim
-     [init]
-         defaultBranch = main
-     [gitflow "feature.finish"]
-        no-ff = true
-     [gitflow "bugfix.finish"]
-        no-ff = true
-     [merge]
-        ff = false
-     [pull]
-        ff = true
-     ```
+   - Follow the instructions in [the setup section of the git guide](./using_git.md#setup) to set up `git`.
 
 Now you have a basic setup, except for an IDE you might want to use to work on code.
 We mostly use PyCharm for backend and WebStorm for frontend stuff, but any other preferred IDE can be used,

@@ -29,6 +29,7 @@ projects work together, check out the remaining sections here.
    repositories
    api_principles
    skos_vocabularies
+   using_git
    local_dev_setup
    dev_guide
    tools
