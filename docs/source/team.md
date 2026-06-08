@@ -5,6 +5,7 @@ https://base.uni-ak.ac.at/about/department/
 
 ## Core Team
 
+- [Cederic Demoulin](https://dieangewandte.at/jart/prj3/angewandte-2016/main.jart?content-id=1458930944469&Pe-Id=10066)
 - [Sandra Hauzmayer](https://www.dieangewandte.at/jart/prj3/angewandte-2016/main.jart?content-id=1458930944469&Pe-Id=7586)
 - [Andrea Klaura](https://www.dieangewandte.at/jart/prj3/angewandte-2016/main.jart?content-id=1458930944469&Pe-Id=8363)
 - [Thomas Kolar](https://dieangewandte.at/jart/prj3/angewandte-2016/main.jart?content-id=1458930944469&Pe-Id=10027)
