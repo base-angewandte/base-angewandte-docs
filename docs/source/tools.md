@@ -184,56 +184,5 @@ For more background on managing Python virtual environments see this article:
 
 BFG can be used to remove sensitive data from a repository.
 
-#### Usage
+For details, see [the tools section of the git guide](./using_git.md#tools).
 
-1. Install BFG, e.g. via homebrew for MacOS, or download the jar-File from https://rtyley.github.io/bfg-repo-cleaner/
-
-2. BFG doesn't modify the latest commit (on `main` or `HEAD`), so ensure it is already clean.
-
-3. Clone a fresh copy of your repo, using the `--mirror` flag:
-
-   ```
-   git clone --mirror ssh://git@github.com:base-angewandte/example.git
-   ```
-
-4. Clean Files and Strings.
-
-   Examples for deleting files:
-
-   ```
-   bfg --delete-files id_{dsa,rsa}  example.git
-   bfg --delete-files "file_name_*.py"  example.git
-   ```
-
-   Example for removing blob:
-
-   ```
-   bfg --strip-blobs-bigger-than 50M  example.git
-   ```
-
-   Example for replacing strings listed in a file (lines can be prefixed with `regex:` or `glob:` if required) with `***REMOVED***`:
-
-   ```
-   bfg --replace-text passwords.txt  example.git
-   ```
-
-   ```{note}
-   If you are using the jar file, `bfg` is an alias for `java -jar bfg.jar` in all examples.
-   ```
-
-5. BFG will update your commits and all branches and tags so they are clean, but it doesn't physically delete the unwanted stuff. So you need to run the following to achieve that as well:
-
-   ```
-   cd example.git
-   git reflog expire --expire=now --all && git gc --prune=now --aggressive
-   ```
-
-6. Push the cleaned repository:
-
-   ```
-   git push
-   ```
-
-   ```{note}
-   This will update **all** refs on the remote server.
-   ```

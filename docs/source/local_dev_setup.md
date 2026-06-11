@@ -12,7 +12,7 @@ Here are the steps to install everything you will need to work with the _base_ c
 
 1. Install some basic packages needed in our setup:
    - ```
-     sudo apt install curl git git-flow build-essential libssl-dev \
+     sudo apt install curl git build-essential libssl-dev \
        libffi-dev zlib1g-dev libsqlite3-dev liblzma-dev libbz2-dev \
        libncurses5-dev libreadline-dev tk8.6-dev
      ```
@@ -49,40 +49,7 @@ Here are the steps to install everything you will need to work with the _base_ c
      to the group `docker`, e.g. with `sudo usermod -a -G docker myusername`. Start a new
      terminal session afterward, so that the group info is updated in the environment.
 5. Set up git
-   - Before committing, make sure to check/update your git configuration. You should at least update your user name
-     and email to what you would like to show up in the published commits. Also our default branch is `main`, which
-     might not be the case with older git versions. Here is how to check and update them:
-     ```bash
-     # check your git config
-     git config --global user.name
-     git config --global user.email
-     git config --global init.defaultBranch
-     # update the settings
-     git config --global user.name "Ms. Robot"
-     git config --global user.email "ro@example.org"
-     git config --global init.defaultBranch "main"
-     ```
-     Alternatively you can also directly edit the _.gitconfig_ file in your home directory (e.g. with
-     `editor ~/.gitconfig`). Here is a template including some handy shortcuts for git:
-     ```ini
-     [user]
-         email = ro@example.org
-         name = Ms. Robot
-     [alias]
-         co = checkout
-         ci = commit
-         st = status
-         br = branch
-         hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-         type = cat-file -t
-         dump = cat-file -p
-     [core]
-         # leave this one out, if you want to keep the standard (nano), or change
-         # to your preferred editor
-         editor = vim
-     [init]
-         defaultBranch = main
-     ```
+   - Follow the instructions in [the setup section of the git guide](./using_git.md#setup) to set up `git`.
 
 Now you have a basic setup, except for an IDE you might want to use to work on code.
 We mostly use PyCharm for backend and WebStorm for frontend stuff, but any other preferred IDE can be used,
