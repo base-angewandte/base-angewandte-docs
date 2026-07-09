@@ -142,8 +142,12 @@ def spam():
 
 ### JavaScript
 
-Please adhere to [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).  
-Use [ESLint](https://eslint.org) in your project set up to check code quality, detect errors and potential problems in the JavaScript code.  
+Please adhere to [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).
+
+#### Linting
+
+Use [ESLint](https://eslint.org) in your project setup to check code quality and detect errors as well as potential problems in the JavaScript code.
+
 When using ESLint please also add the additional rules to your `eslintrc.js` file:
 
 ```javascript
