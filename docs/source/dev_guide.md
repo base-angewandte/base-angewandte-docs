@@ -119,6 +119,27 @@ style guide. In the following cases we came up with our own code style conventio
   where double quotes are explicitly required, the initial form might be used, by applying the
   `# noqa: B907` comment to tell the linters to ignore this.
 
+(linting-python)=
+#### Linting
+
+Besides following [the general linting guidelines](#linting-general), **format** disable comments **like this**: `# noqa: <code> (=<rule-name>) - <annotation>`
+````{admonition} For example
+Instead of this:
+```python
+def spam():
+  User = get_user_model()  # noqa: N806
+```
+Do this:
+```python
+def spam():
+  User = get_user_model()  # noqa: N806 (=non-lowercase-variable-in-function) - this represents a class
+```
+````
+```{note}
+- We are deliberately **not using `ruff: ignore` syntax for portability**.
+- We deliberately **include the code** with the human-readable name **for searchability** (search results for `S101` are more useful than for `assert`!)
+```
+
 ### JavaScript
 
 Please adhere to [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).  
