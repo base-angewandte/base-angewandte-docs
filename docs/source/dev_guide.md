@@ -148,7 +148,7 @@ Please adhere to [Airbnb's JavaScript Style Guide](https://github.com/airbnb/jav
 
 Use [ESLint](https://eslint.org) in your project setup to check code quality and detect errors as well as potential problems in the JavaScript code.
 
-When using ESLint please also add the additional rules to your `eslintrc.js` file:
+When using ESLint please also follow [the general linting guidelines](#linting-general), and add the additional rules to your `eslintrc.js` file:
 
 ```javascript
   rules: {
