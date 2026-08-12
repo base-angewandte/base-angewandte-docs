@@ -153,6 +153,33 @@ When using ESLint please also add the additional rules to your `eslintrc.js` fil
   },
 ```
 
+**Avoid creating disable comments in the first place**, if practically possible.
+
+```{note}
+We recognize that sometimes, it's preferable to use disable comments. In particular, we don't think it's a good idea to restrict ourselves to rules that are completely universal.
+```
+
+If you do need a disable comment, **annotate it**, stating why it doesn't apply and/or is necessary.
+
+````{admonition} For example
+Instead of this:
+```js
+axiosInstance.interceptors.request.use((config) => {
+  // eslint-disable-next-line no-param-reassign
+  config.headers['X-Csrftoken'] = 'value';
+  return config;
+});
+```
+Do this:
+```js
+axiosInstance.interceptors.request.use((config) => {
+  // eslint-disable-next-line no-param-reassign - Intentional config mutation
+  config.headers['X-Csrftoken'] = 'value';
+  return config;
+});
+```
+````
+
 #### Vue.js
 
 New base projects may be implemented using [Vue.js](https://vuejs.org/) or [NuxtJS](https://nuxtjs.org/) if server-side-rendering is required, respectively. Currently, all projects are using [Vue.js v2.x](https://vuejs.org/v2/guide/).
