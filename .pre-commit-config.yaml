@@ -1,1 +1,8 @@
-config/.pre-commit-config.yaml
+default_install_hook_types: [pre-commit, commit-msg]
+exclude: (/migrations/|manage.py|.svg|.drawio)
+repos:
+  - repo: https://github.com/base-angewandte/pre-commit-hooks
+    rev: "2.5"
+    hooks:
+      - id: base-hooks
+      - id: base-commit-msg-hooks
