@@ -89,6 +89,12 @@ style guide. In the following cases we came up with our own code style conventio
 (linting-python)=
 #### Linting
 
+**Avoid creating disable comments in the first place**, if practically possible.
+
+```{note}
+We recognize that sometimes, it's preferable to use disable comments. In particular, we don't think it's a good idea to restrict ourselves to rules that are completely universal.
+```
+
 If you do need a disable comment, **annotate it**, stating why it doesn't apply and/or is necessary, 
 and **format** it **like this**: `# noqa: <code> [<rule-name>] - <annotation>`
 
