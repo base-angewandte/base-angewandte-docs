@@ -106,7 +106,7 @@ def spam():
 Do this:
 ```python
 def spam():
-  User = get_user_model()  # noqa: N806 (=non-lowercase-variable-in-function) - this represents a class
+  User = get_user_model()  # noqa: N806 [non-lowercase-variable-in-function] - this represents a class
 ```
 ````
 ```{note}
