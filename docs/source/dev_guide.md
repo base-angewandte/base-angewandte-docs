@@ -109,6 +109,7 @@ def spam():
   User = get_user_model()  # noqa: N806 [non-lowercase-variable-in-function] - this represents a class
 ```
 ````
+
 ```{note}
 - We are deliberately **not using `ruff: ignore` syntax for portability**.
 - We deliberately **include the code** with the human-readable name **for searchability** (search results for `S101` are more useful than for `assert`!)
