@@ -86,7 +86,6 @@ style guide. In the following cases we came up with our own code style conventio
   where double quotes are explicitly required, the initial form might be used, by applying the
   `# noqa: B907` comment to tell the linters to ignore this.
 
-(linting-python)=
 #### Linting
 
 **Avoid creating disable comments in the first place**, if practically possible.
