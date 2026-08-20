@@ -83,8 +83,7 @@ style guide. In the following cases we came up with our own code style conventio
 - **string interpolation for quoted values**: in cases where we want to have a value quoted, eg.
   as in `f'The value is "{value}".'`, we use the `repr()` function instead, so the f-string becomes
   `f'The value is {repr(value)}.'`. This results in single quotes around the value. Only in cases
-  where double quotes are explicitly required, the initial form might be used, by applying the
-  `# noqa: B907` comment to tell the linters to ignore this.
+  where double quotes are explicitly required, the initial form might be used.
 
 #### Linting
 
