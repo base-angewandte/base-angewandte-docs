@@ -125,11 +125,6 @@ When using ESLint please also add the additional rules to your `eslint.config.js
 
 ```javascript
   rules: {
-    // don't require .vue extension when importing
-    'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never', // specific for vue projects
-    }],
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions
     'no-param-reassign': ['error', {
