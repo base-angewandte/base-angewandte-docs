@@ -121,7 +121,7 @@ def spam():
 
 Use [ESLint](https://eslint.org) in your project setup to check code quality and detect errors as well as potential problems in the JavaScript code.
 
-When using ESLint please also add the additional rules to your `eslintrc.js` file:
+When using ESLint please also add the additional rules to your `eslint.config.js` file:
 
 ```javascript
   rules: {
