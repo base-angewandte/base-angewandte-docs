@@ -83,22 +83,47 @@ style guide. In the following cases we came up with our own code style conventio
 - **string interpolation for quoted values**: in cases where we want to have a value quoted, eg.
   as in `f'The value is "{value}".'`, we use the `repr()` function instead, so the f-string becomes
   `f'The value is {repr(value)}.'`. This results in single quotes around the value. Only in cases
-  where double quotes are explicitly required, the initial form might be used, by applying the
-  `# noqa: B907` comment to tell the linters to ignore this.
+  where double quotes are explicitly required, the initial form might be used.
+
+#### Linting
+
+**Avoid creating disable comments in the first place**, if practically possible.
+
+```{note}
+We recognize that sometimes, it's preferable to use disable comments. In particular, we don't think it's a good idea to restrict ourselves to rules that are completely universal.
+```
+
+If you do need a disable comment, **annotate it**, stating why it doesn't apply and/or is necessary,
+and **format** it **like this**: `# noqa: <code> [<rule-name>] - <annotation>`
+
+````{admonition} For example
+Instead of this:
+```python
+def spam():
+  User = get_user_model()  # noqa: N806
+```
+Do this:
+```python
+def spam():
+  User = get_user_model()  # noqa: N806 [non-lowercase-variable-in-function] - this represents a class
+```
+````
+
+```{note}
+- We are deliberately **not using `ruff: ignore` syntax for portability**.
+- We deliberately **include the code** with the human-readable name **for searchability** (search results for `S101` are more useful than for `assert`!)
+```
 
 ### JavaScript
 
-Please adhere to [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).  
-Use [ESLint](https://eslint.org) in your project set up to check code quality, detect errors and potential problems in the JavaScript code.  
-When using ESLint please also add the additional rules to your `eslintrc.js` file:
+#### Linting
+
+Use [ESLint](https://eslint.org) in your project setup to check code quality and detect errors as well as potential problems in the JavaScript code.
+
+When using ESLint please also add the additional rules to your `eslint.config.js` file:
 
 ```javascript
   rules: {
-    // don't require .vue extension when importing
-    'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never', // specific for vue projects
-    }],
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions
     'no-param-reassign': ['error', {
@@ -119,6 +144,33 @@ When using ESLint please also add the additional rules to your `eslintrc.js` fil
     'no-console': [process.env.NODE_ENV === 'production' ? 'error' : 'off', { allow: ['warn', 'error'] }],
   },
 ```
+
+**Avoid creating disable comments in the first place**, if practically possible.
+
+```{note}
+We recognize that sometimes, it's preferable to use disable comments. In particular, we don't think it's a good idea to restrict ourselves to rules that are completely universal.
+```
+
+If you do need a disable comment, **annotate it**, stating why it doesn't apply and/or is necessary.
+
+````{admonition} For example
+Instead of this:
+```js
+axiosInstance.interceptors.request.use((config) => {
+  // eslint-disable-next-line no-param-reassign
+  config.headers['X-Csrftoken'] = 'value';
+  return config;
+});
+```
+Do this:
+```js
+axiosInstance.interceptors.request.use((config) => {
+  // eslint-disable-next-line no-param-reassign - Intentional config mutation
+  config.headers['X-Csrftoken'] = 'value';
+  return config;
+});
+```
+````
 
 #### Vue.js
 
