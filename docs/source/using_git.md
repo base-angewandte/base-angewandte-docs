@@ -278,8 +278,15 @@ For [hotfixes as defined by `git-flow`](https://nvie.com/posts/a-successful-git-
   - Make a hotfix branch based on `main` and create a PR **that you merge immediately without review**.
   - Do NOT merge `main` back into `develop`.
   - Instead, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that.
-  - Go through the standard review process for this PR, backporting any resulting changes to `main` in a new hotfix branch.
-    - This branch obviously does not require review or a followup, unless it doesn't apply cleanly.
+  - Go through the standard review process for this PR
+    - If no changes are made as a result of review: congrats, you're done!
+    - If changes are made, they should also be backported to `main` in a third hotfix branch (based on `main`).
+      - This branch obviously does not require review or a followup, unless it doesn't apply cleanly.
+  - If the hotfix needs to be deployed on a dev server ASAP (for example, for security reasons):
+    - Even then, don't merge into `develop`, instead create a throwaway branch to deploy the hotfix that
+      - is based on the commit currently deployed on that dev instance
+      - contains the changes from the hotfix
+    - If `develop` is currently deployed, you can just use the PR branch for `develop` instead of the throwaway branch
 - **Other hotfixes**:
   - Make a hotfix branch based on `main` and create a PR **that gets reviewed normally**.
   - Once this review is done, make a branch that contains the same commit(s) as the hotfix, but rebased on `develop`, and make a PR for that.
